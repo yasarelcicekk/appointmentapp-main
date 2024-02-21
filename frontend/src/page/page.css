@@ -16,15 +16,16 @@
     margin: 5%;
 }
 
-.link {
-    text-decoration: none;
-    color: #121212;
-}
-.linkBox {
-    margin: 10%;
-}
-.link:hover {
-   color: #9C27B0;
+.homeAlert {
+    width: 92%;
+    border: 0.5px solid #121212!important;
+    background-color:  rgba(255, 255, 255, 0.5)!important;
+    color: black !important;
+    border-radius: 8px !important;
+    font-family:'Gill Sans, sans-serif'!important  ;
+    font-size: 1.2vw !important;
+    padding-left: 2% !important;
+    margin: 1% auto !important;
 }
 
 @media screen and (max-width: 900px) {
@@ -45,11 +46,13 @@
 
     .boxRev {
         flex-direction: column-reverse !important;
-        
+
     }
+
     .homeCardBox {
         flex-direction: column-reverse !important;
     }
+
     .aboutCardBox {
         flex-direction: column-reverse !important;
         width: 100% !important;
@@ -57,27 +60,60 @@
         text-align: center;
     }
 
-    .contactPage{
+    .contactMap {
         flex-direction: column-reverse !important;
     }
 
-    .contactPageİnfo{
-        flex-direction: column-reverse !important;
+    .contactMapResponsive {
+        width: auto !important;
+        height: auto !important;
+        margin-left: 13% !important;
+        margin-right: 15% !important;
     }
+
 
     .contactPageTextfield {
         flex-direction: column-reverse !important;
-        margin: 0 auto !important;
-        width: '100%' !important;
+        width: auto !important;
+        height: auto !important;
+        margin-left: 15% !important;
+        margin-right: 15% !important;
     }
-    .contactPageTextfield input[type="text"] {
-        width: 100%;
+
+    .contactPageİnfo {
+        flex-direction: column-reverse !important;
+        margin-left: 15% !important;
+        margin-right: 15% !important;
+
+
     }
+
+
+
+
 }
 
+.gallery {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 10%;
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
 
+.gallery>div {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 1rem;
+}
 
+.gallery > div > img {
+    width: 85%;
+    transition: all .5s;
+}
 
+.gallery > div > img:hover {
+    transform: scale(1.4) rotate(12deg);
 
-
-
+}
