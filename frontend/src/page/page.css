@@ -1,0 +1,83 @@
+/* .home-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+}
+.home-responsive  {
+    left: 0;
+    top: 0;
+    border: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+} */
+.homeBox {
+    margin: 5%;
+}
+
+.link {
+    text-decoration: none;
+    color: #121212;
+}
+.linkBox {
+    margin: 10%;
+}
+.link:hover {
+   color: #9C27B0;
+}
+
+@media screen and (max-width: 900px) {
+    .boxImg {
+        width: 96% !important;
+        margin: 0 !important;
+    }
+
+    .boxText {
+        width: 94% !important;
+        margin-top: 2% !important;
+        font-size: 14px !important;
+    }
+
+    .boxTextH1 {
+        font-size: 18px !important;
+    }
+
+    .boxRev {
+        flex-direction: column-reverse !important;
+        
+    }
+    .homeCardBox {
+        flex-direction: column-reverse !important;
+    }
+    .aboutCardBox {
+        flex-direction: column-reverse !important;
+        width: 100% !important;
+        height: 100% !important;
+        text-align: center;
+    }
+
+    .contactPage{
+        flex-direction: column-reverse !important;
+    }
+
+    .contactPageİnfo{
+        flex-direction: column-reverse !important;
+    }
+
+    .contactPageTextfield {
+        flex-direction: column-reverse !important;
+        margin: 0 auto !important;
+        width: '100%' !important;
+    }
+    .contactPageTextfield input[type="text"] {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
