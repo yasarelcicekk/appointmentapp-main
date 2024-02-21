@@ -8,6 +8,9 @@ import { Box } from '@mui/material';
 import venimage from '../img/veneers.jpg';
 import impimage from '../img/implant.jpg';
 import smileimage from '../img/smile.jpg';
+import implant from '../img/implant2.jpg';
+import kaplama from '../img/kaplama.jpg';
+import imlantimage from '../img/implantdent.jpg';
 import './page.css'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -17,9 +20,15 @@ import DoneOutlineSharpIcon from '@mui/icons-material/DoneOutlineSharp';
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import {getDoctorsRedux} from "../redux/doctorActions"
-
+import Collapse from '@mui/material/Collapse';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import Alert from '@mui/material/Alert';
+import { useState } from "react";
 
 const Home = () => {
+
+  const [open,setOpen] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -47,6 +56,23 @@ const Home = () => {
 
   return (
     <div>
+
+<Collapse in={open}>
+<Alert className="homeAlert" icon={false} action={
+            <IconButton
+              aria-label="close"
+              color="inherit"
+              size="small"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          }>
+You can make an appointment on our website by registering and logging in now
+</Alert>
+</Collapse>
 
       <Box className="homeBox" container spacing={3} item xs={12} sm={6} md={5} sx={{
         mr: 2,
@@ -103,10 +129,19 @@ const Home = () => {
         </Typography>
          <img className='boxImg' src={waitimage} alt="Interior" style={{marginRight: '20px', borderRadius: '10px', width: '48%' }} />
       </Box>
-      <br />
-      <br />
-      <br />
-      <br />
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <div className="gallery" style={{ display: 'flex', width: '100%' }}>
+          <div style={{ flex: 1 }}>
+            <img src={implant} style={{ width: '100%', height: '100%' }} alt="" />
+          </div>
+          <div style={{ flex: 1 }}>
+            <img src={kaplama} style={{ width: '100%', height: '100%' }} alt="" />
+          </div>
+          <div style={{ flex: 1 }}>
+            <img src={imlantimage} style={{ width: '100%', height: '100%' }} alt="" />
+          </div>
+        </div>
+      </Box>
       <Box >
         <Typography>
           <h1 style={{ textAlign: 'center', fontFamily: 'Gill Sans, sans-serif', fontSize: '2.5em', marginBottom: '0.5em', color: 'black' }}>How Our Team Can Help</h1>

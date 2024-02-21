@@ -134,7 +134,7 @@ export default function Signin() {
               <Grid container>
                 <Grid className='linkBox' item xs>
                   <RouterLink className='link' to="/Forgotpassword" variant="body2">
-                    {"Forgot password?"}
+                    {"Forgot Password"}
                   </RouterLink>
                 </Grid>
                 <Grid className='linkBox' item >

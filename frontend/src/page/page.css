@@ -16,6 +16,17 @@
     margin: 5%;
 }
 
+.link {
+    text-decoration: none;
+    color: #121212;
+}
+.linkBox {
+    margin: 10%;
+}
+.link:hover {
+   color: #9C27B0;
+}
+
 .homeAlert {
     width: 92%;
     border: 0.5px solid #121212!important;
