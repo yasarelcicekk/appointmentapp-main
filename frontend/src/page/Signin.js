@@ -19,7 +19,16 @@ import axios from "axios"
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { login } from "../redux/authActions";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { OutlinedInput } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
 import "./page.css"
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const defaultTheme = createTheme();
 
@@ -27,6 +36,9 @@ export default function Signin() {
   const dispatch = useDispatch();
   const navigate=useNavigate();
   const [error, setError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((showPassword) => !showPassword);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +53,9 @@ export default function Signin() {
         let data = response.data;
         if (data.name) {
           console.log('Login successful:', data);
+          cookies.set("TOKEN", response.data.token, {
+            path: "/",
+          });
         dispatch(login({ user: data }));
           navigate("/profile")
         } else {
@@ -102,17 +117,33 @@ export default function Signin() {
                 autoFocus
                 size='small'
               />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                size='small'
-              />
+                 <FormControl fullWidth size='small' variant="outlined">  
+<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            margin='normal'
+            name='password'
+            label="Password"
+						 size='small'
+						fullWidth
+            required
+           autoComplete="current-password"
+            type={showPassword ? 'text' : 'password'}
+           
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  sx={{ color: "gray" }}
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"

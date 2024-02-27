@@ -6,7 +6,7 @@ const Role = db.role;
 
 verifyToken = (req, res, next) =>   {
   
-  let token = req.session.token;
+  const token = req.session.token;
 
   if (!token){
     return res.status(403).send({ message: "No token provided!" });
@@ -28,7 +28,7 @@ verifyToken = (req, res, next) =>   {
 isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err + "user cant find admin authjwt"});
       return;
     }
 
@@ -38,7 +38,7 @@ isAdmin = (req, res, next) => {
       },
       (err, roles) => {
         if (err) {
-          res.status(500).send({ message: err });
+          res.status(500).send({ message: err + "cant find role authjwt" });
           return;
         }
 

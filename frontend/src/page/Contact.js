@@ -1,5 +1,4 @@
 
-
 import React, { useState } from "react";
 import {
   Box,
@@ -15,12 +14,6 @@ import SocialIcons from "../components/SocialIcons";
 import Copyright from "../components/Copyright";
 import Map from '../components/Map';
 import './page.css'
-
-
-
-
-
-
 
 const Contact = () => {
 
@@ -103,8 +96,10 @@ const Contact = () => {
               textAlign: 'center',
               flexDirection: 'column-reverse'
             }}>
-            <Map />
-          </Box>
+               <Map />
+            </Box>
+           
+          
           <Box className='contactPageTextfield' sx={{
             color: 'black',
             width: '40%',

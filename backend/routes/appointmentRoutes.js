@@ -1,5 +1,5 @@
 const controller = require("../controllers/appointmentController.js");
-
+const authJwt = require("../middlewares/authJwt")
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -10,7 +10,7 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/addAppointment",
+    "/addAppointment", authJwt.verifyToken,
     controller.create
   );
 

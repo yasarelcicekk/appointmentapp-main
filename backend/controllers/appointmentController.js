@@ -6,8 +6,7 @@ const Doctor = db.doctor;
 
 exports.create=(req,res)=>{
 
-  authJwt.verifyToken(req, res, () => {
-    const userId = req.userId;
+  const userId = req.userId;
 
     //validate request
     if(!req.body){
@@ -29,14 +28,14 @@ exports.create=(req,res)=>{
         },
         (err, doctorName) => {
           if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send({ message: err + "cant find doctor" });
             return;
           }
 
           appointment.DoctorID = doctorName.map((doc) => doc._id);
           appointment.save((err) => {
             if (err) {
-              res.status(500).send({ message: err });
+              res.status(500).send({ message: err + "cant save appointment" });
               return;
             }
 
@@ -45,16 +44,16 @@ exports.create=(req,res)=>{
         }
       );
     } else {
-      Doctor.findOne({ doctorName:req.body.doctorName  }, (err, doc) => {
+      Doctor.findOne({ doctorName: "Serkan"  }, (err, doc) => {
         if (err) {
-          res.status(500).send({ message: err });
+          res.status(500).send({ message: err + "cant find doctorfindone" });
           return;
         }
 
-        appointment.DoctorID = doc._id;
+        appointment.DoctorID = [doc._id];
         appointment.save((err) => {
           if (err) {
-            res.status(500).send({ message: err });
+            res.status(500).send({ message: err + "cant save appointment findone" });
             return;
           }
 
@@ -63,7 +62,7 @@ exports.create=(req,res)=>{
       });
     }
   });
-}); 
+; 
 };
 
     //retrieve and return all Doctors/retrieve and return a single Appointment

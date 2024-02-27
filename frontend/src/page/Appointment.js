@@ -63,7 +63,7 @@ const Appointment = () => {
 
     const data= {
      date:selectedDate+selectedTime,
-     doctorName:selectedDoctor
+     doctorName:selectedDoctor.split(' ')[0]
    };
    axios
    .post('http://localhost:27017/addAppointment', data)

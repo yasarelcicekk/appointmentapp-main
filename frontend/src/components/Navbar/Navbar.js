@@ -20,8 +20,6 @@ import { useSelector } from 'react-redux';
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/authActions";
-// import Signout from "../../page/Signout.js"
-// import { logout } from '../../redux/authActions';
 
 
 
@@ -166,8 +164,8 @@ const handleSigninClick = () => {
           
               {navItems.map((navItem, index) => (
                 
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" onClick={navItem.onclick} >{navItem.text}</Typography>
+                <MenuItem key={index} onClick={()=>{ navItem.onclick(); handleCloseNavMenu();}}>
+                  <Typography textAlign="center"  >{navItem.text}</Typography>
                 </MenuItem>
               ))}
              -
@@ -229,7 +227,7 @@ const handleSigninClick = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting,index) => (
-                <MenuItem key={index}  onClick={setting.onclick}>
+                <MenuItem key={index}  onClick={()=>{setting.onclick(); handleCloseUserMenu();}}>
                   <Typography textAlign="center">{setting.text}</Typography>
                 </MenuItem>
               ))}
