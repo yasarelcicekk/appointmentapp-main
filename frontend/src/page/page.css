@@ -12,6 +12,9 @@
     width: 100%;
     position: absolute;
 } */
+.homeText {
+    color: rgba(0, 0, 0, 0.6);
+}
 .homeBox {
     margin: 5%;
 }

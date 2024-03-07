@@ -4,25 +4,33 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-verifyToken = (req, res, next) =>   {
-  
-  const token = req.session.token;
+const verifyToken = async (req, res, next) => {
+  const token = req.cookies.jwt;
 
-  if (!token){
-    return res.status(403).send({ message: "No token provided!" });
+  if(token && token !== undefined) {
+    try {
+      const decoded = jwt.verify(token, config.secret);
+      req.userId = decoded.id;
+  
+      const user = await User.findById(req.userId);
+  
+      if (!user) {
+        return res.status(404).json({ status: false, message: "User not found!" });
+      }
+  
+      next();
+      return res.json({ status: true, user });
+    } catch (err) {
+      return res.status(500).json({ status: false, error: err.message + "token undefined" });
+    }
+  }
+  else {
+    res.json({ status: false, error: "token not found" });
+    next();
+
   }
 
-  jwt.verify(token,
-            config.secret,
-            (err, decoded) => {
-              if (err) {
-                return res.status(401).send({
-                  message: "Unauthorized!",
-                });
-              }
-              req.userId = decoded.id;
-              next();
-            });
+ 
 };
 
 isAdmin = (req, res, next) => {

@@ -6,6 +6,14 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+const maxAge = 3 * 24 * 60 * 60;
+
+const createToken = (id) => {
+  return jwt.sign({ id }, config.secret, {
+    expiresIn: maxAge,
+  });
+};
+
 exports.signup = (req, res) => {
   const user = new User({
     email: req.body.email,
@@ -57,8 +65,14 @@ exports.signup = (req, res) => {
             res.status(500).send({ message: err });
             return;
           }
+          const token = createToken(user._id);
 
-          res.send({ message: "User was registered successfully!" });
+          res.cookie("jwt", token, {
+            withCredentials: true,
+            httpOnly: false,
+            maxAge: maxAge * 1000,
+          });
+          res.send({ message: "User was registered successfully! findone cookie" });
         });
       });
     }
@@ -90,13 +104,9 @@ exports.signin = (req, res) => {
         return res.status(401).send({ message: "Invalid Password!" });
       }
 
-      const token = jwt.sign({ id: user.id },
-                              config.secret,
-                              {
-                                algorithm: 'HS256',
-                                allowInsecureKeySizes: true,
-                                expiresIn: 86400, // 24 hours
-                              });
+      const token = createToken(user._id);
+      console.log(token)
+      res.cookie("jwt", token, { httpOnly: false, maxAge: maxAge * 1000 })
 
       var authorities = [];
 
@@ -104,7 +114,7 @@ exports.signin = (req, res) => {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
 
-      req.session.token = token;
+     
 
       res.status(200).send({
         id: user._id,
@@ -145,8 +155,10 @@ function getUserId() {
 exports.signout = async (req, res) => {
   try {
     req.session = null;
+    req.cookies.jwt=null;
     return res.status(200).send({ message: "You've been signed out!" });
   } catch (err) {
     this.next(err);
+    console.log("controllersignouterror")
   }
 };

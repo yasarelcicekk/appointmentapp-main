@@ -16,7 +16,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import SocialIcons from '../components/SocialIcons';
 import Copyright from '../components/Copyright';
 import axios from "axios"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { login } from "../redux/authActions";
 import Visibility from '@mui/icons-material/Visibility';
@@ -27,8 +27,8 @@ import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import "./page.css"
-import Cookies from "universal-cookie";
-const cookies = new Cookies();
+import { useCookies } from "react-cookie";
+
 
 const defaultTheme = createTheme();
 
@@ -37,8 +37,16 @@ export default function Signin() {
   const navigate=useNavigate();
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [cookies] = useCookies([]);
+
 
   const handleClickShowPassword = () => setShowPassword((showPassword) => !showPassword);
+
+  useEffect(() => {
+    if (cookies.jwt) {
+      navigate("/");
+    }
+  }, [cookies, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,15 +56,12 @@ export default function Signin() {
     password: userData.get('password')
   };
   axios
-      .post('http://localhost:27017/signin', data)
+      .post('http://localhost:27017/signin', data, { withCredentials: true })
       .then(response => {
         let data = response.data;
         if (data.name) {
           console.log('Login successful:', data);
-          cookies.set("TOKEN", response.data.token, {
-            path: "/",
-          });
-        dispatch(login({ user: data }));
+          dispatch(login({ user: data }));
           navigate("/profile")
         } else {
           setError('Login Failed. Please check your email and password.');
@@ -73,10 +78,10 @@ export default function Signin() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container = "true" component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
-          item
+          item="true"
           xs={false}
           sm={4}
           md={7}
@@ -86,7 +91,7 @@ export default function Signin() {
             backgroundPosition: 'center',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item="true" xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
               my: 8,
@@ -162,13 +167,13 @@ export default function Signin() {
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid className='linkBox' item xs>
+              <Grid container = "true">
+                <Grid className='linkBox' item="true" xs>
                   <RouterLink className='link' to="/Forgotpassword" variant="body2">
                     {"Forgot Password"}
                   </RouterLink>
                 </Grid>
-                <Grid className='linkBox' item >
+                <Grid className='linkBox' item="true" >
                   <RouterLink className='link' to="/Signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </RouterLink>
