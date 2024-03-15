@@ -27,25 +27,34 @@
    color: #9C27B0;
 }
 
+.homeAlert {
+    width: 92%;
+    border: 0.5px solid #121212!important;
+    background-color:  rgba(255, 255, 255, 0.5)!important;
+    color: black !important;
+    border-radius: 8px !important;
+    font-family:'Gill Sans, sans-serif'!important  ;
+    font-size: 1.2vw !important;
+    padding-left: 2% !important;
+    margin: 1% auto !important;
+}
+
 @media screen and (max-width: 900px) {
     .boxImg {
         width: 96% !important;
         margin: 0 !important;
     }
-
     .boxText {
         width: 94% !important;
         margin-top: 2% !important;
         font-size: 14px !important;
     }
-
     .boxTextH1 {
         font-size: 18px !important;
     }
-
     .boxRev {
         flex-direction: column-reverse !important;
-        
+
     }
     .homeCardBox {
         flex-direction: column-reverse !important;
@@ -56,28 +65,153 @@
         height: 100% !important;
         text-align: center;
     }
-
-    .contactPage{
+    .contactMap {
         flex-direction: column-reverse !important;
     }
-
-    .contactPageİnfo{
-        flex-direction: column-reverse !important;
+    .contactMapResponsive {
+        width: auto !important;
+        height: auto !important;
+        margin-left: 13% !important;
+        margin-right: 15% !important;
     }
-
     .contactPageTextfield {
         flex-direction: column-reverse !important;
-        margin: 0 auto !important;
-        width: '100%' !important;
+        width: auto !important;
+        height: auto !important;
+        margin-left: 15% !important;
+        margin-right: 15% !important;
     }
-    .contactPageTextfield input[type="text"] {
-        width: 100%;
+    .contactPageİnfo {
+        flex-direction: column-reverse !important;
+        margin-left: 15% !important;
+        margin-right: 15% !important;
     }
 }
 
+.gallery {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 10%;
+    margin-top: 3%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.gallery>div {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+.gallery > div > img {
+    width: 85%;
+    transition: all .5s;
+}
+.gallery > div > img:hover {
+    transform: scale(1.4) rotate(12deg);
+
+}
+  .left-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .left-container p {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .profile-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-container p {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  
+  .input-group {
+    margin-bottom: 10px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+
+
+  .profile-page {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left-container,
+  .right-container {
+    width: 48%; 
+    padding: 20px; 
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px ;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding-right: 2%;
+    margin-bottom: 20px; 
+  }
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .input-group label {
+    margin-bottom: 5px;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .profile-page {
+      flex-direction: column;
+    }
+  
+    .left-container,
+    .right-container {
+      width: 100%;
+    }
+  }
+.vertical-line {
+    width: 2px; 
+    background-color: #000; 
+    height: 100%; 
+    margin: 0 5px; 
+  }
+
+ 
 
 
 
+  
+  
+  
 
+  
 
+  
 
+  
+ 
+  
+  
+
+  

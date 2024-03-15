@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { LockOutlined } from '@mui/icons-material';
+import LockResetIcon from '@mui/icons-material/LockReset';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -50,8 +50,8 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlined />
+          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60  }}>
+            <LockResetIcon  sx={{  width: 35, height: 35}}/>
           </Avatar>
           <Typography component="h1" variant="h5">
             Reset Password

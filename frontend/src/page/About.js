@@ -61,7 +61,7 @@ const doctors = useSelector((state) => state.doctors.doctors);
           return(
              <Card>
              <CardActionArea>
-               <CardMedia
+               <CardMedia className='aboutCard'
                  component='img'
                  src={`data:image/jpg;base64,${doctor.doctorImage}`}
                  sx={{
@@ -69,7 +69,8 @@ const doctors = useSelector((state) => state.doctors.doctors);
                    width: '90%', // Dilediğiniz genişliği buradan ayarlayabilirsiniz
                    height: '50%',
                    margin: 'auto',
-                   display: 'block'
+                   display: 'block',
+                   
    
                  }} //doctor card bilgileri düzenle. image ekle database e ve reduxtan getirip göster.
                />

@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import {
   Box,
@@ -86,7 +88,7 @@ const Contact = () => {
 
     <div>
       <form onSubmit={handleSubmit}>
-        <Box className='contactPageTextfield' sx={{
+        <Box  className='contactMap' sx={{
           display: 'flex',
           justifyContent: 'space-around',
           paddingTop: '10px',
@@ -94,7 +96,7 @@ const Contact = () => {
 
         }}>
           <Box
-            className='contactPage'
+          className='contactMapResponsive'
             sx={{
               color: 'black',
               width: '40%',
@@ -103,7 +105,7 @@ const Contact = () => {
             }}>
             <Map />
           </Box>
-          <Box sx={{
+          <Box className='contactPageTextfield' sx={{
             color: 'black',
             width: '40%',
             textAlign: 'center',
@@ -193,7 +195,7 @@ const Contact = () => {
 
         <Box
 
-          className='contactPageİnfo'
+          
           sx={{
             textAlign: 'center',
             margin: '50px',
@@ -205,7 +207,7 @@ const Contact = () => {
             flexWrap: 'wrap',
           }}
         >
-          <Box sx={{
+          <Box  className='contactPageİnfo' sx={{
             pt: 4,
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row', md: 'row' },

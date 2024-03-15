@@ -20,31 +20,31 @@ import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
+
+
 
 const Appointment = () => {
-
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
   const doctors = useSelector((state) => state.doctors.doctors);
-
   const [error, setError] = useState(null);
-
-  
   const [success, setSuccess] = useState(null);
-
   const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
-
+  
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
 
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
-  };
-
+  const handleTimeChange = (newTime) => {
+    setSelectedTime(newTime);
+  }
   const handleDoctorChange = (event) => {
     setSelectedDoctor(event.target.value);
   };
@@ -57,43 +57,40 @@ const Appointment = () => {
       return;
     }
 
-    console.log(`Selected Date: ${selectedDate}`);
-    console.log(`Selected Time: ${selectedTime}`);
-    console.log(`Selected Doctor: ${selectedDoctor}`);
+    const data = {
+      date: selectedDate + selectedTime,
+      doctorName: selectedDoctor
+    };
+    axios
+      .post('http://localhost:27017/addAppointment', data)
+      .then(response => {
+        var data = response.data;
+        if (data) {
+          setSuccess("Appointment process successful, you are redirected to the My Appointments page")
+          setTimeout(() => {
+            navigate("/profile")
+          }, 3000);
 
-    const data= {
-     date:selectedDate+selectedTime,
-     doctorName:selectedDoctor
-   };
-   axios
-   .post('http://localhost:27017/addAppointment', data)
-   .then(response => {
-     var data = response.data;
-     if (data) {
-      setSuccess("Appointment process successful, you are redirected to the My Appointments page.")
-       console.log('Appointment process successful', data);
-       setTimeout(() => {
-         navigate("/profile")
-       }, 3000);
-       
-     } else {
-      setError('Appointment process failed');
-      console.error('Appointment process failed:', data.message);
-     }
-   })
-   .catch(error => {
-    setError('Appointment process failed.');
-    setTimeout(() => {
-      setError(null)
-    }, 2000)
-     console.error('Error during appointment:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
-   });
+        } else {
+          setError('Appointment process failed');
+        }
+      })
+      .catch(error => {
+        setError('Appointment process failed.');
+        setTimeout(() => {
+          setError(null)
+        }, 2000)
+      });
 
   };
 
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
+
+  const today = new Date().toISOString().split('T')[0];
+
+  
 
   return (
     <Container
@@ -112,7 +109,7 @@ const Appointment = () => {
       <form onSubmit={handleAppointmentSubmit}>
         <TextField
           id="date"
-          label="Tarih"
+          label="Date"
           type="date"
           required
           value={selectedDate}
@@ -122,28 +119,65 @@ const Appointment = () => {
           }}
           fullWidth
           margin="normal"
-        />
-        <TextField
-          id="time"
-          label="Saat"
-          type="time"
-          required
-          value={selectedTime}
-          onChange={handleTimeChange}
-          InputLabelProps={{
-            shrink: true,
+          inputProps={{
+            min: today,
           }}
-          fullWidth
-          margin="normal"
         />
-        <FormControl fullWidth margin="normal">
-          <InputLabel id="doctor-label">Doktor</InputLabel>
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer  components={['TimePicker']}>
+      <TimePicker 
+      value={selectedTime}  
+      ampm={false}  
+      minTime={dayjs().set('hour', 9).startOf('hour')} 
+      skipDisabled={true} 
+      maxTime={dayjs().set('hour', 17).set('minute', 0)} 
+      timeSteps={{minutes:30}}  
+      onChange={handleTimeChange} 
+      label="Time" 
+      
+       />
+      </DemoContainer>
+    </LocalizationProvider>
+
+        {/* <FormControl fullWidth margin="normal">
+          <InputLabel id="doctor-label">Time</InputLabel>
           <Select
-          required
+            required
+            labelId="doctor-label"
+            id="doctor"
+            value={selectedTime}
+            label="Time"
+            onChange={handleTimeChange}
+          >
+            <MenuItem value="08:00">08:00</MenuItem>
+            <MenuItem value="08:30">08:30</MenuItem>
+            <MenuItem value="09:00">09:00</MenuItem>
+            <MenuItem value="09:30">09:30</MenuItem>
+            <MenuItem value="10:00">10:00</MenuItem>
+            <MenuItem value="10:30">10:30</MenuItem>
+            <MenuItem value="11:00">11:00</MenuItem>
+            <MenuItem value="11:30">11:30</MenuItem>
+            <MenuItem value="13:00">13:00</MenuItem>
+            <MenuItem value="13:30">13:30</MenuItem>
+            <MenuItem value="14:00">14:00</MenuItem>
+            <MenuItem value="14:30">14:30</MenuItem>
+            <MenuItem value="15:00">15:00</MenuItem>
+            <MenuItem value="15:30">15:30</MenuItem>
+            <MenuItem value="16:00">16:00</MenuItem>
+            <MenuItem value="16:30">16:30</MenuItem>
+            <MenuItem value="17:00">17:00</MenuItem>
+            
+            
+          </Select>
+        </FormControl> */}
+        <FormControl fullWidth margin="normal">
+          <InputLabel id="doctor-label">Doctor</InputLabel>
+          <Select
+            required
             labelId="doctor-label"
             id="doctor"
             value={selectedDoctor}
-            label="Doktor"
+            label="Doctor"
             onChange={handleDoctorChange}
           >
             {doctors.map((doctor, index) => (
@@ -154,11 +188,11 @@ const Appointment = () => {
           </Select>
         </FormControl>
         {success && (<Alert severity="success">
-  <AlertTitle>Your registration has been completed</AlertTitle>
-  {success}
-</Alert>)}
-            {error && (
-       <Alert severity="error">{error}</Alert>)}
+          <AlertTitle>Your registration has been completed</AlertTitle>
+          {success}
+        </Alert>)}
+        {error && (
+          <Alert severity="error">{error}</Alert>)}
         <Button
           variant="contained"
           color="primary"
@@ -167,7 +201,7 @@ const Appointment = () => {
           sx={{
             mt: 3,
             mb: 2,
-            backgroundColor: 'black', 
+            backgroundColor: 'black',
             color: 'white',
           }}
         >
