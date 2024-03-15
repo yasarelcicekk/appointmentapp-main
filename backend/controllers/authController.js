@@ -154,8 +154,8 @@ function getUserId() {
 
 exports.signout = async (req, res) => {
   try {
-    req.session = null;
-    req.cookies.jwt=null;
+    // req.cookies.jwt=null;
+    // req.session = null;
     return res.status(200).send({ message: "You've been signed out!" });
   } catch (err) {
     this.next(err);

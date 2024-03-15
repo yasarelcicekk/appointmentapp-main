@@ -10,7 +10,7 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/addAppointment", authJwt.verifyToken,
+    "/addAppointment",
     controller.create
   );
 

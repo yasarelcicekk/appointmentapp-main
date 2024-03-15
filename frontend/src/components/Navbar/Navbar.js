@@ -19,7 +19,7 @@ import { useSelector } from 'react-redux';
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/authActions";
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 
 
 function useCheckUserSession() {
@@ -48,7 +48,7 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const loggedin = useCheckUserSession();
   const dispatch = useDispatch();
-  const [cookie, removeCookie] = useCookies([]);
+  const [cookie, setCookie, removeCookie] = useCookies([]);
 
   
 const navItems = [
@@ -67,7 +67,7 @@ const handleSignOut = () => {
     if (response.status===200) {
       console.log('Logout successful:');
        dispatch(logout());
-       removeCookie("jwt");
+       removeCookie("jwt")
       navigate("/")
     } else {
       // setError('Logout Failed');

@@ -4,18 +4,18 @@ const Appointment = mongoose.model(
   "Appointment",
   new mongoose.Schema({
    
-    userID: [
+    userID: 
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users"
       }
-    ],
-    DoctorID: [
+    ,
+    DoctorID: 
         {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "Doctors"
+          ref: "doctors"
         }
-      ],
+      ,
 
       date:Date
   })

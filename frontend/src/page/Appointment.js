@@ -26,6 +26,8 @@ const Appointment = () => {
   const navigate=useNavigate();
 
   const doctors = useSelector((state) => state.doctors.doctors);
+  const user = useSelector((state) => state.auth.user);
+
 
   const [error, setError] = useState(null);
 
@@ -62,9 +64,11 @@ const Appointment = () => {
     console.log(`Selected Doctor: ${selectedDoctor}`);
 
     const data= {
-     date:selectedDate+selectedTime,
-     doctorName:selectedDoctor.split(' ')[0]
+     date:selectedDate+ " "+selectedTime,
+     doctorName:selectedDoctor.split(' ')[0],
+     userID:user.id
    };
+   console.log(data)
    axios
    .post('http://localhost:27017/addAppointment', data)
    .then(response => {

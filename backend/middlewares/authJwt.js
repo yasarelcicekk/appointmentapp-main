@@ -6,8 +6,8 @@ const Role = db.role;
 
 const verifyToken = async (req, res, next) => {
   const token = req.cookies.jwt;
-
-  if(token && token !== undefined) {
+  console.log(token)
+  if(token) {
     try {
       const decoded = jwt.verify(token, config.secret);
       req.userId = decoded.id;
@@ -21,11 +21,11 @@ const verifyToken = async (req, res, next) => {
       next();
       return res.json({ status: true, user });
     } catch (err) {
-      return res.status(500).json({ status: false, error: err.message + "token undefined" });
+      return res.status(500).json({ status: false, error: err.message + "token undefined", token });
     }
   }
   else {
-    res.json({ status: false, error: "token not found" });
+    return res.status(401).json({ status: false, error: "Token not found" });
     next();
 
   }

@@ -6,34 +6,43 @@ const Doctor = db.doctor;
 
 exports.create=(req,res)=>{
 
-  const userId = req.userId;
-
+  // const userId = req.userId;
+    let docid;
     //validate request
+    console.log(req.body.date)
     if(!req.body){
         res.status(400).send({message:'Content cannot be empty'})
         return;
     }
-    const appointment=new Appointment({
-        userID:userId,
-        DoctorID:req.body.DoctorID,
-        date:req.body.date
-    })
-  
-    appointment.save((err, appointment) => {
-
-      if (req.body.doctorName) {
-      Doctor.find(
-        {
-          doctorName: { $in: req.body.doctorName },
-        },
-        (err, doctorName) => {
+    Doctor.findOne({ doctorName: { $regex: new RegExp(req.body.doctorName, 'i') } },
+        (err, doctor) => {
           if (err) {
             res.status(500).send({ message: err + "cant find doctor" });
             return;
           }
+          console.log("Doctors:", doctor); // Debugging line
+          console.log("Appointment Object:", appointment);
+          docid = doctor._id;
+        })
+    const appointment=new Appointment({
+        userID:req.body.userID,
+        date:req.body.date,
+        DoctorID:docid
+    })
+  
+    appointment.save((err, savedAppointment) => {
 
-          appointment.DoctorID = doctorName.map((doc) => doc._id);
-          appointment.save((err) => {
+      if (req.body.doctorName) {
+      Doctor.findOne({ doctorName: { $regex: new RegExp(req.body.doctorName, 'i') } },
+        (err, doctor) => {
+          if (err) {
+            res.status(500).send({ message: err + "cant find doctor" });
+            return;
+          }
+          console.log("Doctors:", doctor); // Debugging line
+          console.log("Appointment Object:", appointment);
+          savedAppointment.DoctorID = doctor._id;
+          savedAppointment.save((err) => {
             if (err) {
               res.status(500).send({ message: err + "cant save appointment" });
               return;
@@ -50,8 +59,8 @@ exports.create=(req,res)=>{
           return;
         }
 
-        appointment.DoctorID = [doc._id];
-        appointment.save((err) => {
+        savedAppointment.DoctorID = doc._id;
+        savedAppointment.save((err) => {
           if (err) {
             res.status(500).send({ message: err + "cant save appointment findone" });
             return;

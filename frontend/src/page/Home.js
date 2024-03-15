@@ -25,7 +25,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
 import { useState, useEffect, useRef } from "react";
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 import { login, logout } from "../redux/authActions";
 import { useNavigate } from "react-router-dom";
 
@@ -36,23 +36,25 @@ const Home = () => {
   const [open,setOpen] = useState(true);
 
   const dispatch = useDispatch();
-  const [cookies, removeCookie] = useCookies([]);
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
   const hasRun = useRef(false)
 
   useEffect(() => {
     const verifyUser = async () => {
-      if (cookies.jwt && cookies.jwt.value !== undefined) {
+      if (cookies.jwt && cookies.jwt !== undefined) {
         axios
         .post('http://localhost:27017', {}, { withCredentials: true })
         .then(response => 
           {let data = response.data
           if (data.status===true) {
             dispatch(login({user:data.user}))
-           
+            console.log("status true user loggedin")
           } else {
             dispatch(logout())
-            removeCookie("jwt");
+            removeCookie("jwt")
+            console.log("status false user not loggedin")
+
           }
         })
       } else {
