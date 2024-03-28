@@ -134,7 +134,9 @@ const Appointment = () => {
       timeSteps={{minutes:30}}  
       onChange={handleTimeChange} 
       label="Time" 
-      
+        views={['hours', 'minutes']}
+        
+        
        />
       </DemoContainer>
     </LocalizationProvider>

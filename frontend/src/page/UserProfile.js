@@ -7,8 +7,8 @@ const Profile = () => {
   console.log(`userprofile ${user}`);
   return (
     <div className="profile-page">
-      <div className="right-container profile-container">
-        <h2>Profil Bilgileri</h2>
+      <div className="right-container clearfix">
+        <h2>Information Profile</h2>
         <div className="input-group">
           <label>
             Name:
@@ -30,8 +30,8 @@ const Profile = () => {
         {/* Diğer bilgileri burada ekleyin */}
       </div>
       <div className="vertical-line"></div> 
-      <div className="left-container">
-        <h2>Randevularım</h2>
+      <div className="left-container clearfix">
+        <h2>My Appointments</h2>
         <div className="input-group">
           <label>
             Date:
