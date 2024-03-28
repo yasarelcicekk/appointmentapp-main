@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,6 +29,7 @@ import IconButton from '@mui/material/IconButton';
 import { OutlinedInput } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { useCookies } from "react-cookie";
 import './page.css'
 
 const defaultTheme = createTheme();
@@ -44,6 +45,14 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [cookies] = useCookies(["cookie-name"]);
+
+
+  useEffect(() => {
+    if (cookies.jwt) {
+      navigate("/");
+    }
+  }, [cookies, navigate]);
 
   const handleClickShowPassword = () => setShowPassword((showPassword) => !showPassword);
 
@@ -79,7 +88,7 @@ export default function SignUp() {
           if(validator.isMobilePhone(data.phoneNumber.split(" ").join(""))) {
             setValidPNumber(false)
             axios
-            .post('http://localhost:27017/signup', data)
+            .post('http://localhost:27017/signup', data, { withCredentials: true })
             .then(response => {
               var data = response.data;
               if (data) {
@@ -269,8 +278,8 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container>
-              <Grid item xs>
+            <Grid container="true">
+              <Grid item="true" xs>
 
               </Grid>
 

@@ -24,14 +24,48 @@ import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Cookies, useCookies } from "react-cookie";
+import { login, logout } from "../redux/authActions";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
+
+  const navigate=useNavigate();
   const [open,setOpen] = useState(true);
 
   const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies([]);
 
+  const hasRun = useRef(false)
+
+  useEffect(() => {
+    const verifyUser = async () => {
+      if (cookies.jwt && cookies.jwt !== undefined) {
+        axios
+        .post('http://localhost:27017', {}, { withCredentials: true })
+        .then(response => 
+          {let data = response.data
+          if (data.status===true) {
+            dispatch(login({user:data.user}))
+            console.log("status true user loggedin")
+          } else {
+            dispatch(logout())
+            removeCookie("jwt")
+            console.log("status false user not loggedin")
+
+          }
+        })
+      } else {
+        dispatch(logout())
+      }
+     
+    };
+    verifyUser();
+  }, [cookies, dispatch, navigate, removeCookie]);
+
+useEffect(() => {
   axios.get('http://localhost:27017/findDoctor', {
     params: {
       ID:null
@@ -51,12 +85,14 @@ const Home = () => {
     console.log(`doctors:${error}`);
   })
   .finally(function () {
-    // always executed
+    hasRun.current=true;
   });
+})
+
+ 
 
   return (
     <div>
-
 <Collapse in={open}>
 <Alert className="homeAlert" icon={false} action={
             <IconButton
@@ -74,7 +110,7 @@ You can make an appointment on our website by registering and logging in now
 </Alert>
 </Collapse>
 
-      <Box className="homeBox" container spacing={3} item xs={12} sm={6} md={5} sx={{
+      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5} sx={{
         mr: 2,
         display: 'flex',
         flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
@@ -86,7 +122,7 @@ You can make an appointment on our website by registering and logging in now
 
         <img className='boxImg' src={intimage} alt="Interior" style={{ marginRight: '20px', borderRadius: '10px', width: '48%' }} />
 
-        <Typography
+        <Box
           className='boxText'
           align="right"
           style={{
@@ -94,15 +130,17 @@ You can make an appointment on our website by registering and logging in now
             fontSize: '1.4vw',
             fontFamily: 'Gill Sans, sans-serif',
             textAlign: 'center',
+            lineHeight:"1.5",
+            letterSpacing:"0.00938em"
           }}>
-          <h1 className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em' }}>
-            The Care, Attention And Service You Deserve</h1>
+          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em',fontWeight:"bold" }}>
+            The Care, Attention And Service You Deserve</Typography>
           At Hermes London Dental Clinic, we focus on providing clients with the best experience during each visit. We offer both routine and cosmetic dentistry in the heart of Central London near both Victoria and Pimlico. We have a friendly team of cosmetic dentists, dental hygienists and private orthodontists who provide treatments in a clean and comfortable environment. Our dentists and other experts put your needs first by putting you in full control of your oral hygiene by showing images and providing a detailed explanation of your dental needs. We provide treatments you fully understand with a very preventative approach to ensure your teeth and treatments last longer. Our dentists will explain your options and help you choose the treatment plan that best suits your condition. We also provide immediate treatment to patients who require an emergency dentist in London and facial aesthetic treatment such as Dermal Fillers.
-        </Typography>
+        </Box>
       </Box>
 
      
-      <Box className="homeBox boxRev" container spacing={3} item xs={12} sm={6} md={5} sx={{
+      <Box className="homeBox boxRev" container = "true" spacing={3} item="true" xs={12} sm={6} md={5} sx={{
         mr: 2,
         display: 'flex',
         flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
@@ -114,19 +152,20 @@ You can make an appointment on our website by registering and logging in now
 
        
 
-        <Typography
+        <Box
           className='boxText'
           style={{
             width: '48%',
             fontSize: '1.4vw',
             fontFamily: 'Gill Sans, sans-serif',
             textAlign: 'center',
-        
+            lineHeight:"1.5",
+            letterSpacing:"0.00938em"
           }}>
-          <h1 className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em' }}>
-            The Care, Attention And Service You Deserve</h1>
+          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight:"bold" }}>
+            The Care, Attention And Service You Deserve</Typography>
           At Hermes London Dental Clinic, we focus on providing clients with the best experience during each visit. We offer both routine and cosmetic dentistry in the heart of Central London near both Victoria and Pimlico. We have a friendly team of cosmetic dentists, dental hygienists and private orthodontists who provide treatments in a clean and comfortable environment. Our dentists and other experts put your needs first by putting you in full control of your oral hygiene by showing images and providing a detailed explanation of your dental needs. We provide treatments you fully understand with a very preventative approach to ensure your teeth and treatments last longer. Our dentists will explain your options and help you choose the treatment plan that best suits your condition. We also provide immediate treatment to patients who require an emergency dentist in London and facial aesthetic treatment such as Dermal Fillers.
-        </Typography>
+        </Box>
          <img className='boxImg' src={waitimage} alt="Interior" style={{marginRight: '20px', borderRadius: '10px', width: '48%' }} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -143,11 +182,11 @@ You can make an appointment on our website by registering and logging in now
         </div>
       </Box>
       <Box >
-        <Typography>
-          <h1 style={{ textAlign: 'center', fontFamily: 'Gill Sans, sans-serif', fontSize: '2.5em', marginBottom: '0.5em', color: 'black' }}>How Our Team Can Help</h1>
-        </Typography>
+        <Box>
+          <Typography variant="h1" style={{ textAlign: 'center', fontFamily: 'Gill Sans, sans-serif', fontSize: '2.5em', marginBottom: '0.5em', color: 'black', fontWeight:"bold" }}>How Our Team Can Help</Typography>
+        </Box>
       </Box>
-      <Box container
+      <Box container = "true"
       className= 'homeCardBox'
        sx={{
         pt: 4,
@@ -173,11 +212,11 @@ You can make an appointment on our website by registering and logging in now
               <Typography gutterBottom variant="h4" component="div" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
                 Straightening Crooked Teeth
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
+              <div className="homeText" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
                 <h3> <DoneOutlineSharpIcon />  Clear braces with Invisalign.</h3>
                 <h3> <DoneOutlineSharpIcon /> Dental bonding to correct minor misalignment.</h3>
                 <h3> <DoneOutlineSharpIcon /> Dental veneers to correct misalignment, dark teeth and to alter the shape of teeth.</h3>
-              </Typography>
+              </div>
             </CardContent>
           </CardActionArea>
         </Card>
@@ -195,11 +234,11 @@ You can make an appointment on our website by registering and logging in now
               <Typography gutterBottom variant="h4" component="div" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
                 Replacing Missing Teeth
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
+              <div className="homeText" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
                 <h3> <DoneOutlineSharpIcon />  Dental implants.</h3>
                 <h3> <DoneOutlineSharpIcon /> Dental bridges.</h3>
                 <h3> <DoneOutlineSharpIcon /> Cosmetic dentures.</h3>
-              </Typography>
+              </div>
             </CardContent>
           </CardActionArea>
         </Card>
@@ -217,11 +256,11 @@ You can make an appointment on our website by registering and logging in now
               <Typography gutterBottom variant="h4" component="div" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
                 Brightening Your Smile
               </Typography>
-              <Typography variant="body2" color="text.secondary" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
+              <div className="homeText" sx={{fontFamily: 'Gill Sans, sans-serif'}}>
                 <h3> <DoneOutlineSharpIcon />  Teeth whitening to whiten teeth.</h3>
                 <h3> <DoneOutlineSharpIcon /> Dental bonding or dental veneers to change the shape of teeth.Dental bridges.</h3>
                 <h3> <DoneOutlineSharpIcon /> Dental bonding, veneers or orthodontics to rearrange crooked or misaligned teeth.</h3>
-              </Typography>
+              </div>
             </CardContent>
           </CardActionArea>
         </Card>

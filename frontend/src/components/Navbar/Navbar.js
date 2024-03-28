@@ -14,21 +14,20 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 import logo from '../../img/kadyasbg.png'
 import './navbar.css'
-import Link from "@mui/material/Link";
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios"
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/authActions";
-// import Signout from "../../page/Signout.js"
-// import { logout } from '../../redux/authActions';
-
+import { Cookies, useCookies } from "react-cookie";
 
 
 function useCheckUserSession() {
 
-  const user = useSelector((state) => state.auth.user);
-  const [loggedIn, setLoggedIn] = useState(false);
+   const user = useSelector((state) => state.auth.user);
+
+  const [loggedIn, setLoggedIn] = useState(!!user);
+  
   useEffect(() => {
     if(user)
     {
@@ -49,8 +48,9 @@ function ResponsiveAppBar() {
   const navigate = useNavigate();
   const loggedin = useCheckUserSession();
   const dispatch = useDispatch();
+  const [cookie, setCookie, removeCookie] = useCookies([]);
 
-
+  
 const navItems = [
   { text: "Home", onclick: () => navigate("/") },
   { text: "About", onclick: () => navigate("/about") },
@@ -67,6 +67,7 @@ const handleSignOut = () => {
     if (response.status===200) {
       console.log('Logout successful:');
        dispatch(logout());
+       removeCookie("jwt")
       navigate("/")
     } else {
       // setError('Logout Failed');
@@ -119,7 +120,7 @@ const handleSigninClick = () => {
           <Box
           onClick={()=>navigate("/")}
             variant="h6"
-            noWrap
+            nowrap="true"
             component="a"
             sx={{
               mr: 2,
@@ -166,19 +167,19 @@ const handleSigninClick = () => {
           
               {navItems.map((navItem, index) => (
                 
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" onClick={navItem.onclick} >{navItem.text}</Typography>
+                <MenuItem key={index} onClick={()=>{ navItem.onclick(); handleCloseNavMenu();}}>
+                  <Typography textAlign="center"  >{navItem.text}</Typography>
                 </MenuItem>
               ))}
              -
             </Menu>
           </Box>
            {/*Logo Section*/}
-          <Link 
+          <Box
             variant="h5"
-            noWrap
+            nowrap="true"
             component="a"
-            href="/"
+            onClick={()=>navigate("/")}
             sx={{
               mr:{ lg:2},
               display: { xs: 'flex', md: 'none' },
@@ -191,7 +192,7 @@ const handleSigninClick = () => {
             }}
           >  
             <img alt='logo' className='kyLogo' src={logo}/>
-          </Link >
+          </Box>
           <Box  sx={{ flexGrow: 1 , mr:0,display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end' }}>
             {navItems.map((navItem, index) => (
               <Button 
@@ -229,7 +230,7 @@ const handleSigninClick = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting,index) => (
-                <MenuItem key={index}  onClick={setting.onclick}>
+                <MenuItem key={index}  onClick={()=>{setting.onclick(); handleCloseUserMenu();}}>
                   <Typography textAlign="center">{setting.text}</Typography>
                 </MenuItem>
               ))}

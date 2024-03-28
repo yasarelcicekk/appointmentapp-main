@@ -48,7 +48,7 @@ const navItems = [
           <Box
           onClick={()=>navigate("/")}
             variant="h6"
-            noWrap
+            nowrap="true"
             component="a"
             sx={{
               mr: 2,
@@ -105,7 +105,7 @@ const navItems = [
           
           <Link
             variant="h5"
-            noWrap
+            nowrap="true"
             component="a"
             href="/"
             sx={{

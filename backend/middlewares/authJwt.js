@@ -4,31 +4,39 @@ const db = require("../models");
 const User = db.user;
 const Role = db.role;
 
-verifyToken = (req, res, next) =>   {
+const verifyToken = async (req, res, next) => {
+  const token = req.cookies.jwt;
+  console.log(token)
+  if(token) {
+    try {
+      const decoded = jwt.verify(token, config.secret);
+      req.userId = decoded.id;
   
-  let token = req.session.token;
+      const user = await User.findById(req.userId);
+  
+      if (!user) {
+        return res.status(404).json({ status: false, message: "User not found!" });
+      }
+  
+      next();
+      return res.json({ status: true, user });
+    } catch (err) {
+      return res.status(500).json({ status: false, error: err.message + "token undefined", token });
+    }
+  }
+  else {
+    return res.status(401).json({ status: false, error: "Token not found" });
+    next();
 
-  if (!token){
-    return res.status(403).send({ message: "No token provided!" });
   }
 
-  jwt.verify(token,
-            config.secret,
-            (err, decoded) => {
-              if (err) {
-                return res.status(401).send({
-                  message: "Unauthorized!",
-                });
-              }
-              req.userId = decoded.id;
-              next();
-            });
+ 
 };
 
 isAdmin = (req, res, next) => {
   User.findById(req.userId).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: err + "user cant find admin authjwt"});
       return;
     }
 
@@ -38,7 +46,7 @@ isAdmin = (req, res, next) => {
       },
       (err, roles) => {
         if (err) {
-          res.status(500).send({ message: err });
+          res.status(500).send({ message: err + "cant find role authjwt" });
           return;
         }
 

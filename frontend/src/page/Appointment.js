@@ -31,6 +31,9 @@ import dayjs from 'dayjs';
 const Appointment = () => {
   const navigate = useNavigate();
   const doctors = useSelector((state) => state.doctors.doctors);
+  const user = useSelector((state) => state.auth.user);
+
+
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [selectedDate, setSelectedDate] = useState('');
@@ -56,31 +59,39 @@ const Appointment = () => {
       setOpenDialog(true);
       return;
     }
-
-    const data = {
-      date: selectedDate + selectedTime,
-      doctorName: selectedDoctor
-    };
-    axios
-      .post('http://localhost:27017/addAppointment', data)
-      .then(response => {
-        var data = response.data;
-        if (data) {
-          setSuccess("Appointment process successful, you are redirected to the My Appointments page")
-          setTimeout(() => {
-            navigate("/profile")
-          }, 3000);
-
-        } else {
-          setError('Appointment process failed');
-        }
-      })
-      .catch(error => {
-        setError('Appointment process failed.');
-        setTimeout(() => {
-          setError(null)
-        }, 2000)
-      });
+    const formattedDate = dayjs(selectedDate).format('DD-MM-YYYY');
+    const formattedTime = dayjs(selectedTime).format('HH:mm');
+console.log("auth user appointment 63:",user)
+console.log("user.id appointment 64",user.id)
+    const data= {
+     date:formattedDate+ " "+formattedTime,
+     doctorName:selectedDoctor.split(' ')[0],
+     userID:user.id
+   };
+   console.log("Appointment",data)
+   axios
+   .post('http://localhost:27017/addAppointment', data, { withCredentials: true })
+   .then(response => {
+     var data = response.data;
+     if (data) {
+      setSuccess("Appointment process successful, you are redirected to the My Appointments page.")
+       console.log('Appointment process successful', data);
+       setTimeout(() => {
+         navigate("/profile")
+       }, 3000);
+      
+     } else {
+      setError('Appointment process failed');
+      console.error('Appointment process failed:', data.message);
+     }
+   })
+   .catch(error => {
+    setError('Appointment process failed.');
+    setTimeout(() => {
+      setError(null)
+    }, 2000)
+     console.error('Error during appointment:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
+   });
 
   };
 

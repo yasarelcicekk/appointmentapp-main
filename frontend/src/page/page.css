@@ -12,6 +12,9 @@
     width: 100%;
     position: absolute;
 } */
+.homeText {
+    color: rgba(0, 0, 0, 0.6);
+}
 .homeBox {
     margin: 5%;
 }
@@ -56,24 +59,30 @@
         flex-direction: column-reverse !important;
 
     }
+
     .homeCardBox {
         flex-direction: column-reverse !important;
     }
+
     .aboutCardBox {
         flex-direction: column-reverse !important;
         width: 100% !important;
         height: 100% !important;
         text-align: center;
     }
+
     .contactMap {
         flex-direction: column-reverse !important;
     }
+
     .contactMapResponsive {
         width: auto !important;
         height: auto !important;
         margin-left: 13% !important;
         margin-right: 15% !important;
     }
+
+
     .contactPageTextfield {
         flex-direction: column-reverse !important;
         width: auto !important;
@@ -85,7 +94,13 @@
         flex-direction: column-reverse !important;
         margin-left: 15% !important;
         margin-right: 15% !important;
+
+
     }
+
+
+
+
 }
 
 .gallery {
@@ -206,19 +221,18 @@
   }
  
 
+.gallery>div {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 1rem;
+}
 
+.gallery > div > img {
+    width: 85%;
+    transition: all .5s;
+}
 
-  
-  
-  
+.gallery > div > img:hover {
+    transform: scale(1.4) rotate(12deg);
 
-  
-
-  
-
-  
- 
-  
-  
-
-  
+}
