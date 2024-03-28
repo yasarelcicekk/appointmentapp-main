@@ -59,15 +59,18 @@ const Appointment = () => {
       setOpenDialog(true);
       return;
     }
-
+    const formattedDate = dayjs(selectedDate).format('DD-MM-YYYY');
+    const formattedTime = dayjs(selectedTime).format('HH:mm');
+console.log("auth user appointment 63:",user)
+console.log("user.id appointment 64",user.id)
     const data= {
-     date:selectedDate+ " "+selectedTime,
+     date:formattedDate+ " "+formattedTime,
      doctorName:selectedDoctor.split(' ')[0],
      userID:user.id
    };
-   console.log(data)
+   console.log("Appointment",data)
    axios
-   .post('http://localhost:27017/addAppointment', data)
+   .post('http://localhost:27017/addAppointment', data, { withCredentials: true })
    .then(response => {
      var data = response.data;
      if (data) {
@@ -76,7 +79,7 @@ const Appointment = () => {
        setTimeout(() => {
          navigate("/profile")
        }, 3000);
-       
+      
      } else {
       setError('Appointment process failed');
       console.error('Appointment process failed:', data.message);

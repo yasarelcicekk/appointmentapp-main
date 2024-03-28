@@ -4,74 +4,56 @@ const authJwt = require("../middlewares/authJwt")
 const Appointment = db.appointment;
 const Doctor = db.doctor;
 
-exports.create=(req,res)=>{
-
-  // const userId = req.userId;
-    let docid;
-    //validate request
-    console.log(req.body.date)
-    if(!req.body){
-        res.status(400).send({message:'Content cannot be empty'})
-        return;
+exports.create = async (req, res) => {
+  try {
+    // Validate request
+    if (!req.body) {
+      return res.status(400).send({ message: 'Content cannot be empty' });
     }
-    Doctor.findOne({ doctorName: { $regex: new RegExp(req.body.doctorName, 'i') } },
-        (err, doctor) => {
-          if (err) {
-            res.status(500).send({ message: err + "cant find doctor" });
-            return;
-          }
-          console.log("Doctors:", doctor); // Debugging line
-          console.log("Appointment Object:", appointment);
-          docid = doctor._id;
-        })
-    const appointment=new Appointment({
-        userID:req.body.userID,
-        date:req.body.date,
-        DoctorID:docid
-    })
-  
-    appointment.save((err, savedAppointment) => {
 
-      if (req.body.doctorName) {
-      Doctor.findOne({ doctorName: { $regex: new RegExp(req.body.doctorName, 'i') } },
-        (err, doctor) => {
-          if (err) {
-            res.status(500).send({ message: err + "cant find doctor" });
-            return;
-          }
-          console.log("Doctors:", doctor); // Debugging line
-          console.log("Appointment Object:", appointment);
-          savedAppointment.DoctorID = doctor._id;
-          savedAppointment.save((err) => {
-            if (err) {
-              res.status(500).send({ message: err + "cant save appointment" });
-              return;
-            }
+    // Find doctor
+    const doctor = await Doctor.findOne({ doctorName: { $regex: new RegExp(req.body.doctorName, 'i') } });
+    if (!doctor) {
+      return res.status(500).send({ message: "Can't find doctor" });
+    }
 
-            res.send({ message: "Appointment was registered successfully!" });
-          });
-        }
-      );
+    // Create appointment
+    const appointment = new Appointment({
+      userID: req.body.userID,
+      DoctorID: doctor._id,
+      date: req.body.date
+    });
+
+    // Save appointment
+    const savedAppointment = await appointment.save();
+    if (!savedAppointment) {
+      return res.status(500).send({ message: "Can't save appointment" });
+    }
+
+    // If doctorName is provided, find doctor and update appointment
+    if (req.body.doctorName) {
+      const doctor = await Doctor.findOne({ doctorName: { $regex: new RegExp(req.body.doctorName, 'i') } });
+      if (!doctor) {
+        return res.status(500).send({ message: "Can't find doctor" });
+      }
+
+      savedAppointment.DoctorID = doctor._id;
+      await savedAppointment.save();
     } else {
-      Doctor.findOne({ doctorName: "Serkan"  }, (err, doc) => {
-        if (err) {
-          res.status(500).send({ message: err + "cant find doctorfindone" });
-          return;
-        }
+      // If doctorName is not provided, find default doctor and update appointment
+      const doctor = await Doctor.findOne({ doctorName: "Serkan" });
+      if (!doctor) {
+        return res.status(500).send({ message: "Can't find doctor" });
+      }
 
-        savedAppointment.DoctorID = doc._id;
-        savedAppointment.save((err) => {
-          if (err) {
-            res.status(500).send({ message: err + "cant save appointment findone" });
-            return;
-          }
-
-          res.send({ message: "appointment was registered successfully!" });
-        });
-      });
+      savedAppointment.DoctorID = doctor._id;
+      await savedAppointment.save();
     }
-  });
-; 
+
+    res.send({ message: "Appointment was registered successfully!" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
 };
 
     //retrieve and return all Doctors/retrieve and return a single Appointment

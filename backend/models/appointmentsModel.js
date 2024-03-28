@@ -17,7 +17,7 @@ const Appointment = mongoose.model(
         }
       ,
 
-      date:Date
+      date:String
   })
 );
 
