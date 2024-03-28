@@ -2,6 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import './page.css'
 
+import { Card, CardContent, Typography, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   console.log(`userprofile ${user}`);
@@ -11,45 +14,78 @@ const Profile = () => {
         <h2>Information Profile</h2>
         <div className="input-group">
           <label>
-            Name:
-            <input type="text" value={user.name} readOnly />
+            Full Name:
+            <input className='profileInput' type="text" value={user.name} readOnly />
           </label>
         </div>
         <div className="input-group">
           <label>
-            Mail:
-            <input type="email" value={user.email} readOnly />
+            TC:
+            <input className='profileInput' type="number" value={user.age} readOnly />
           </label>
         </div>
         <div className="input-group">
           <label>
             Age:
-            <input type="number" value={user.age} readOnly />
+            <input className='profileInput' type="number" value={user.age} readOnly />
+          </label>
+        </div>
+        <div className="input-group">
+          <label>
+            E Mail:
+            <input className='profileInput' type="email" value={user.email} readOnly />
+          </label>
+        </div>
+        <div className="input-group">
+          <label>
+            Phone Number:
+            <input className='profileInput' type="number" value={user.age} readOnly />
           </label>
         </div>
         {/* Diğer bilgileri burada ekleyin */}
       </div>
-      <div className="vertical-line"></div> 
+      <div className="vertical-line"></div>
       <div className="left-container clearfix">
         <h2>My Appointments</h2>
-        <div className="input-group">
+        {/* <div className="input-group">
           <label>
             Date:
-            <input type="text" value="Date" readOnly />
+            <input className='profileInput' type="text" value="Date" readOnly />
           </label>
         </div>
         <div className="input-group">
           <label>
             Time:
-            <input type="text" value="Time" readOnly />
+            <input className='profileInput' type="text" value="Time" readOnly />
           </label>
         </div>
         <div className="input-group">
           <label>
             Doctor:
-            <input type="text" value="Doctor" readOnly />
+            <input className='profileInput' type="text" value="Doctor" readOnly />
           </label>
-        </div>
+        </div> */}
+        <Card className="card-root">
+          <div className="card-header">
+            <Typography variant="h5" component="h2">
+              My Appointment
+            </Typography>
+            <IconButton className="close-button">
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <CardContent>
+            <Typography className="card-text" variant="body2" component="p">
+              Date
+            </Typography>
+            <Typography className="card-text" variant="body2" component="p">
+              Time
+            </Typography>
+            <Typography className="card-text" variant="body2" component="p">
+              Doctor
+            </Typography>
+          </CardContent>
+        </Card>
         {/* Buraya randevularınızı listelemek için gerekli içeriği ekleyin */}
       </div>
     </div>
