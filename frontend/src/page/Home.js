@@ -18,13 +18,13 @@ import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import DoneOutlineSharpIcon from '@mui/icons-material/DoneOutlineSharp';
 import axios from "axios"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {getDoctorsRedux} from "../redux/doctorActions"
 import Collapse from '@mui/material/Collapse';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo  } from "react";
 import { Cookies, useCookies } from "react-cookie";
 import { login, logout } from "../redux/authActions";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +38,8 @@ const Home = () => {
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
 
-  const hasRun = useRef(false)
+  const [doctorDataFetched, setDoctorDataFetched] = useState(false);
+
 
   useEffect(() => {
     const verifyUser = async () => {
@@ -65,31 +66,29 @@ const Home = () => {
     verifyUser();
   }, [cookies, dispatch, navigate, removeCookie]);
 
-useEffect(() => {
-  axios.get('http://localhost:27017/findDoctor', {
-    params: {
-      ID:null
-    }
-  })
-  .then(response => {
-    let data = response.data;
-    if(data){
-        dispatch(getDoctorsRedux({doctors:data}))
-        console.log("home",data)
-    }
-    else{
-        console.error('get doctors procces failed:', data.message);
-    }
-  })
-  .catch(function (error) {
-    console.log(`doctors:${error}`);
-  })
-  .finally(function () {
-    hasRun.current=true;
-  });
-})
+  const doctors = useSelector(state => state.doctors) || ["loading"]; // 'doctors' Redux store'daki doktor verilerini sakladığınız anahtardır
 
- 
+  console.log("doctors",doctors)
+
+  useEffect(() => {
+    if (!doctorDataFetched) {
+      axios.get('http://localhost:27017/findDoctor')
+        .then(response => {
+          let data = response.data;
+          if (data) {
+            dispatch(getDoctorsRedux({ doctors: data }))
+            console.log("home", data)
+            setDoctorDataFetched(true); // İsteğin yapıldığını işaretle
+          } else {
+            console.error('get doctors process failed:', data.message);
+          }
+        })
+        .catch(function (error) {
+          console.log(`doctors: ${error}`);
+        });
+    }
+  }, [doctorDataFetched, dispatch]);
+
 
   return (
     <div>

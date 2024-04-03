@@ -83,7 +83,6 @@ const handleSignOut = () => {
 
 const settings = [
   { text: "Profile", onclick: () => navigate("/profile") },
-  { text: "Account", onclick: () => navigate("/account") },
   { text: "My Appointments", onclick: () => navigate("/myappointments") },
   { text: "Logout",  onclick: () => handleSignOut()}
 ];

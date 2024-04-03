@@ -130,27 +130,6 @@ exports.signin = (req, res) => {
     
 };
 
-exports.myEndpoint = (req, res) => {
-  // Giriş yapmış kullanıcının ID'sini alın
-  const userId = getUserId();
-
-  // ...
-};
-
-function getUserId() {
-  // Token'ı session'dan alın
-  const token = req.session.token;
-
-  // Token'ı decode edin
-  const decoded = jwt.verify(token, config.secret);
-
-  // UserID'yi alın
-  const userId = decoded.id;
-
-  return userId;
-}
-
-
 
 exports.signout = async (req, res) => {
   try {
