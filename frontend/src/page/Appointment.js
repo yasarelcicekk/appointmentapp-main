@@ -40,7 +40,7 @@ const Appointment = () => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
-  
+
   const handleDateChange = (event) => {
     setSelectedDate(event.target.value);
   };
@@ -61,37 +61,37 @@ const Appointment = () => {
     }
     const formattedDate = dayjs(selectedDate).format('DD-MM-YYYY');
     const formattedTime = dayjs(selectedTime).format('HH:mm');
-console.log("auth user appointment 63:",user)
-console.log("user.id appointment 64",user.id)
-    const data= {
-     date:formattedDate+ " "+formattedTime,
-     doctorName:selectedDoctor.split(' ')[0],
-     userID:user.id
-   };
-   console.log("Appointment",data)
-   axios
-   .post('http://localhost:27017/addAppointment', data, { withCredentials: true })
-   .then(response => {
-     var data = response.data;
-     if (data) {
-      setSuccess("Appointment process successful, you are redirected to the My Appointments page.")
-       console.log('Appointment process successful', data);
-       setTimeout(() => {
-         navigate("/profile")
-       }, 3000);
-      
-     } else {
-      setError('Appointment process failed');
-      console.error('Appointment process failed:', data.message);
-     }
-   })
-   .catch(error => {
-    setError('Appointment process failed.');
-    setTimeout(() => {
-      setError(null)
-    }, 2000)
-     console.error('Error during appointment:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
-   });
+    console.log("auth user appointment 63:", user)
+    console.log("user.id appointment 64", user.id)
+    const data = {
+      date: formattedDate + " " + formattedTime,
+      doctorName: selectedDoctor.split(' ')[0],
+      userID: user.id
+    };
+    console.log("Appointment", data)
+    axios
+      .post('http://localhost:27017/addAppointment', data, { withCredentials: true })
+      .then(response => {
+        var data = response.data;
+        if (data) {
+          setSuccess("Appointment process successful, you are redirected to the My Appointments page.")
+          console.log('Appointment process successful', data);
+          setTimeout(() => {
+            navigate("/profile")
+          }, 3000);
+
+        } else {
+          setError('Appointment process failed');
+          console.error('Appointment process failed:', data.message);
+        }
+      })
+      .catch(error => {
+        setError('Appointment process failed.');
+        setTimeout(() => {
+          setError(null)
+        }, 2000)
+        console.error('Error during appointment:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
+      });
 
   };
 
@@ -101,7 +101,7 @@ console.log("user.id appointment 64",user.id)
 
   const today = new Date().toISOString().split('T')[0];
 
-  
+
 
   return (
     <Container
@@ -134,23 +134,25 @@ console.log("user.id appointment 64",user.id)
             min: today,
           }}
         />
-<LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer  components={['TimePicker']}>
-      <TimePicker 
-      value={selectedTime}  
-      ampm={false}  
-      minTime={dayjs().set('hour', 9).startOf('hour')} 
-      skipDisabled={true} 
-      maxTime={dayjs().set('hour', 17).set('minute', 0)} 
-      timeSteps={{minutes:30}}  
-      onChange={handleTimeChange} 
-      label="Time" 
-        views={['hours', 'minutes']}
-        
-        
-       />
-      </DemoContainer>
-    </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={['TimePicker']}>
+            <TimePicker
+              value={selectedTime}
+              ampm={false}
+              minTime={dayjs().set('hour', 9).startOf('hour')}
+              skipDisabled={true}
+              maxTime={dayjs().set('hour', 17).set('minute', 0)}
+              timeSteps={{ minutes: 30 }}
+              onChange={handleTimeChange}
+              label="Time"
+              views={['hours', 'minutes']}
+              fullWidth= "100%"
+              margin="normal"
+
+
+            />
+          </DemoContainer>
+        </LocalizationProvider>
 
         {/* <FormControl fullWidth margin="normal">
           <InputLabel id="doctor-label">Time</InputLabel>
