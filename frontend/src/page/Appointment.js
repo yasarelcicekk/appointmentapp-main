@@ -146,45 +146,20 @@ const Appointment = () => {
               onChange={handleTimeChange}
               label="Time"
               views={['hours', 'minutes']}
-              fullWidth= "100%"
+              fullWidth
               margin="normal"
-
+              padding="0"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              required
+              sx={{width: '100%'}}
+     
 
             />
           </DemoContainer>
         </LocalizationProvider>
 
-        {/* <FormControl fullWidth margin="normal">
-          <InputLabel id="doctor-label">Time</InputLabel>
-          <Select
-            required
-            labelId="doctor-label"
-            id="doctor"
-            value={selectedTime}
-            label="Time"
-            onChange={handleTimeChange}
-          >
-            <MenuItem value="08:00">08:00</MenuItem>
-            <MenuItem value="08:30">08:30</MenuItem>
-            <MenuItem value="09:00">09:00</MenuItem>
-            <MenuItem value="09:30">09:30</MenuItem>
-            <MenuItem value="10:00">10:00</MenuItem>
-            <MenuItem value="10:30">10:30</MenuItem>
-            <MenuItem value="11:00">11:00</MenuItem>
-            <MenuItem value="11:30">11:30</MenuItem>
-            <MenuItem value="13:00">13:00</MenuItem>
-            <MenuItem value="13:30">13:30</MenuItem>
-            <MenuItem value="14:00">14:00</MenuItem>
-            <MenuItem value="14:30">14:30</MenuItem>
-            <MenuItem value="15:00">15:00</MenuItem>
-            <MenuItem value="15:30">15:30</MenuItem>
-            <MenuItem value="16:00">16:00</MenuItem>
-            <MenuItem value="16:30">16:30</MenuItem>
-            <MenuItem value="17:00">17:00</MenuItem>
-            
-            
-          </Select>
-        </FormControl> */}
         <FormControl fullWidth margin="normal">
           <InputLabel id="doctor-label">Doctor</InputLabel>
           <Select

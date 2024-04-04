@@ -111,8 +111,18 @@ const handleSigninClick = () => {
     setAnchorElUser(null);
   };
 
+  //signup signin 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize); // Cleanup
+  }, []);
+
   return (
-    <AppBar className='nav' position='sticky'>
+    <AppBar sx={{display:"flex", flex:"1", justifyContent:"center", alignItems:"center"}} className='nav' position='sticky'>
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
           {/*Logo Section*/}
@@ -122,19 +132,18 @@ const handleSigninClick = () => {
             nowrap="true"
             component="a"
             sx={{
-              mr: 2,
+              marginX: 'auto',
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
-              ml:3,
             }}
           >
      <img alt='logo' className='kyLogo' src={logo}/>
           </Box>
-          <Box  sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none'} }}>  {/*Menu Section*/}
+          <Box  sx={{ display: { xs: 'flex', md: 'none'},   width: windowWidth<600 ? "114px":"175px", height:"120px" }}>  {/*Menu Section*/}
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -143,7 +152,7 @@ const handleSigninClick = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{width:"37px", height:"37px"}} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -180,9 +189,8 @@ const handleSigninClick = () => {
             component="a"
             onClick={()=>navigate("/")}
             sx={{
-              mr:{ lg:2},
               display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
+              marginX: 'auto',
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -208,8 +216,8 @@ const handleSigninClick = () => {
           {loggedin ? 
           <Box sx={{ flexGrow: 0  ,mr:{lg:3}}}>  
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: 'black' ,width: 45, height: 45 }} src="/broken-image.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, marginLeft:"64px"}}>
+                <Avatar sx={{ bgcolor: 'black' ,width: "50px", height: "50px" }} src="/broken-image.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -237,11 +245,12 @@ const handleSigninClick = () => {
           </Box> 
           :
           <Box sx={{ flexGrow: 0  ,mr:{lg:3}}}>
+            
             <Button 
             onClick={handleSigninClick}
               sx={{ my: 2, color: 'white', display: 'block', padding:4 }}
             >
-              Signup/Signin
+              {windowWidth<600 ? 'Signin' : 'Signup/Signin'}
             </Button>
           </Box>
           }

@@ -84,7 +84,7 @@ const Contact = () => {
         <Box  className='contactMap' sx={{
           display: 'flex',
           justifyContent: 'space-around',
-          paddingTop: '10px',
+          paddingTop: '7px',
           margin: '10px',
 
         }}>
@@ -92,9 +92,10 @@ const Contact = () => {
           className='contactMapResponsive'
             sx={{
               color: 'black',
-              width: '40%',
+              width: '45%',
               textAlign: 'center',
-              flexDirection: 'column-reverse'
+              flexDirection: 'column-reverse',
+              margin: 'auto',
             }}>
                <Map />
             </Box>
@@ -200,14 +201,17 @@ const Contact = () => {
             flexDirection: 'column',
             gap: '20px',
             flexWrap: 'wrap',
+            margin: { xs:"auto", sm:"auto"}
           }}
         >
-          <Box  className='contactPageİnfo' sx={{
+          <Box  className='contactPageİnfo' 
+          sx={{
             pt: 4,
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row', md: 'row' },
             justifyContent: 'space-between',
             gap: '20px',
+            margin: { xs:"auto", sm:"auto"}
           }}>
             
 

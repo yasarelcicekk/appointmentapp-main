@@ -76,15 +76,9 @@
     text-align: center;
   }
 
-  {
-    flex-direction: column-reverse !important;
-  }
-
   .contactMapResponsive {
     width: auto !important;
     height: auto !important;
-    margin-left: 13% !important;
-    margin-right: 15% !important;
   }
 
 
@@ -92,23 +86,33 @@
     flex-direction: column-reverse !important;
     width: auto !important;
     height: auto !important;
-    margin-left: 15% !important;
-    margin-right: 15% !important;
   }
 
   .contactPageİnfo {
     flex-direction: column-reverse !important;
-    margin-left: 15% !important;
-    margin-right: 15% !important;
-
-
   }
-
-
-
-
 }
 
+@media (min-width:300px) and (max-width: 900px) {
+
+  .contactPageTextfield {
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+    margin-bottom: 5% !important;
+  }
+  .contactMapResponsive {
+    margin-left: 5% !important;
+    margin-right: 5% !important;
+  }
+}
+
+@media (min-width:440px) and (max-width: 900px) {
+
+  .contactPageİnfo {
+    margin-left: 15% !important;
+    margin-right: 15% !important;
+  }
+}
 
 .left-container h2 {
   font-size: 24px;

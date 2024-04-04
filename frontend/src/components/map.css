@@ -1,13 +1,10 @@
 .map-responsive {
     overflow: hidden;
-    padding-bottom: 100%;
     position: relative;
-    height: 0;
-    margin-bottom: 50px;
-    margin-top: 70px;
-    margin-left: 20px;
+    height: 450px;
+    margin-bottom: 40px;
+    margin-top: 40px;
     border-radius: 5%;
-
 }
 
 .map-responsive iframe {

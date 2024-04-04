@@ -1,32 +1,6 @@
 .nav {
   background-color: #121212 !important;
 } 
-/* .navBox {
-  padding-bottom: 106px;
-} */
-/* .navButton {
-  float: right !important;
-} */
-/*
-
-.imgLogo {
-  width: 50%;
-  height: 50%;
-}
-@media screen and (max-width: 900px) {
-
-  .mainLogo {
-    display: flex;
-    align-items: center;
-  }
-
-  .mainLogo > .imgLogo {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-} */
 
 .kyLogo {
   width: 115px;
