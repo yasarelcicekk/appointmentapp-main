@@ -6,11 +6,11 @@ const Role = db.role;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-const maxAge = 3 * 24 * 60 * 60;
+const maxAge = 24 * 60 * 60;
 
-const createToken = (id) => {
+const createToken = (id,rememberMe=1) => {
   return jwt.sign({ id }, config.secret, {
-    expiresIn: maxAge,
+    expiresIn: maxAge * rememberMe
   });
 };
 
@@ -103,10 +103,10 @@ exports.signin = (req, res) => {
       if (!passwordIsValid) {
         return res.status(401).send({ message: "Invalid Password!" });
       }
-
-      const token = createToken(user._id);
+      console.log(req.body.rememberMe)
+      const token = createToken(user._id, req.body.rememberMe ? 15 : 1);
       console.log(token)
-      res.cookie("jwt", token, { httpOnly: false, maxAge: maxAge * 1000 })
+      res.cookie("jwt", token, { httpOnly: false, maxAge: maxAge * 1000})
 
       var authorities = [];
 

@@ -159,8 +159,6 @@ export default function SignUp() {
             Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          {/* {error && (
-       <Alert severity="error">you have to agree kvkk</Alert>)} */}
 
             <TextField
               margin="normal"
@@ -265,7 +263,6 @@ export default function SignUp() {
             {error && (
        <Alert severity="error">{error}</Alert>)}
             <Button
-              // onClick={handleSubmit}
               type="submit"
               fullWidth
               variant="contained"

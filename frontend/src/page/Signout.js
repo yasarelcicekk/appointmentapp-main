@@ -7,7 +7,6 @@ import axios from "axios"
 export default function Signout(){
     const dispatch = useDispatch();
     const navigate=useNavigate();
-    // const [error, setError] = useState(false);
 
     axios 
         .post('http://localhost:27017/signout')
@@ -18,12 +17,10 @@ export default function Signout(){
              dispatch(logout());
             navigate("/")
           } else {
-            // setError('Logout Failed');
             console.error('Logout failed:', response.data.message);
           }
         })
         .catch(error => {
-        //   setError('Logout Failed');
           console.error('Error during logout:', error.response.data.message);
         });
     }

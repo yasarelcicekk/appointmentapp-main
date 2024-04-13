@@ -49,29 +49,10 @@ const Profile = () => {
             <input className='profileInput' type="number" value={user.age} readOnly />
           </label>
         </div>
-        {/* Diğer bilgileri burada ekleyin */}
       </div>
       <div className="vertical-line"></div>
       <div className="left-container clearfix">
         <h2>My Appointments</h2>
-        {/* <div className="input-group">
-          <label>
-            Date:
-            <input className='profileInput' type="text" value="Date" readOnly />
-          </label>
-        </div>
-        <div className="input-group">
-          <label>
-            Time:
-            <input className='profileInput' type="text" value="Time" readOnly />
-          </label>
-        </div>
-        <div className="input-group">
-          <label>
-            Doctor:
-            <input className='profileInput' type="text" value="Doctor" readOnly />
-          </label>
-        </div> */}
         <Card className="card-root">
           <div className="card-header">
             <Typography variant="h5" component="h2">
@@ -93,7 +74,6 @@ const Profile = () => {
             </Typography>
           </CardContent>
         </Card>
-        {/* Buraya randevularınızı listelemek için gerekli içeriği ekleyin */}
       </div>
 
       

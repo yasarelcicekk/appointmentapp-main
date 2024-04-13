@@ -64,9 +64,6 @@ const Contact = () => {
     console.log(`Selected Lastname: ${selectedLastname}`);
     console.log(`Selected Phonenumber: ${selectedPhonenumber}`);
 
-    // Additional logic for form submission can be added here
-
-    // Clear form fields after submission
     setSelectedFirstname('');
     setSelectedLastname('');
     setSelectedPhonenumber('');

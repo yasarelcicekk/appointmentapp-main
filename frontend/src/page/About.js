@@ -66,13 +66,13 @@ const doctors = useSelector((state) => state.doctors.doctors);
                  src={`data:image/jpg;base64,${doctor.doctorImage}`}
                  sx={{
                   borderRadius:"20px",
-                   width: '90%', // Dilediğiniz genişliği buradan ayarlayabilirsiniz
+                   width: '90%', 
                    height: '50%',
                    margin: 'auto',
                    display: 'block',
                    
    
-                 }} //doctor card bilgileri düzenle. image ekle database e ve reduxtan getirip göster.
+                 }} 
                />
                <CardContent>
                  <Typography gutterBottom variant="h4" component="div">
@@ -89,83 +89,6 @@ const doctors = useSelector((state) => state.doctors.doctors);
              </CardActionArea>
            </Card> )
         })}
-     
-        {/* <Card>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              src={avatarimg}
-              sx={{
-                width: '50%', 
-                height: '50%',
-                margin: 'auto',
-                display: 'block'
-
-              }}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h4" component="div">
-                Dr. Phil McGraw
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                <h3> Languages spoken</h3>
-                <h3> <DoneOutlineSharpIcon /> English</h3>
-                <h3> <DoneOutlineSharpIcon /> Spanish</h3>
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              src={avatarimg}
-              sx={{
-                width: '50%', // Dilediğiniz genişliği buradan ayarlayabilirsiniz
-                height: '50%',
-                margin: 'auto',
-                display: 'block'
-              }}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h4" component="div">
-                Dr. Paul Nassif
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                <h3> Languages spoken</h3>
-                <h3> <DoneOutlineSharpIcon /> English </h3>
-                <h3> <DoneOutlineSharpIcon /> Turkish </h3>
-
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-        <Card>
-          <CardActionArea>
-            <CardMedia
-              component='img'
-              src={avatarimg}
-              sx={{
-                width: '50%',
-                height: '50%',
-                margin: 'auto',
-                display: 'block'
-              }}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h4" component="div">
-                Dr. Robert Rey
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                <h3> Languages spoken</h3>
-                <h3> <DoneOutlineSharpIcon />English</h3>
-                <h3> <DoneOutlineSharpIcon /> Greek</h3>
-
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card> */}
       </Box>
       <SocialIcons />
       <hr />

@@ -33,7 +33,7 @@ const Home = () => {
 
 
   const navigate=useNavigate();
-  const [open,setOpen] = useState(true);
+  const [open,setOpen] = useState(false);
 
   const dispatch = useDispatch();
   const [cookies, setCookie, removeCookie] = useCookies([]);
@@ -51,23 +51,25 @@ const Home = () => {
           if (data.status===true) {
             dispatch(login({user:data.user}))
             console.log("status true user loggedin")
+            setOpen(false)
           } else {
             dispatch(logout())
             removeCookie("jwt")
             console.log("status false user not loggedin")
-
+            setOpen(true)
           }
         })
       } else {
         dispatch(logout())
+        setOpen(true)
       }
      
     };
     verifyUser();
   }, [cookies, dispatch, navigate, removeCookie]);
 
-  const doctors = useSelector(state => state.doctors) || ["loading"]; // 'doctors' Redux store'daki doktor verilerini sakladığınız anahtardır
-
+  const doctors = useSelector(state => state.doctors) || ["loading"];
+  
   console.log("doctors",doctors)
 
   useEffect(() => {

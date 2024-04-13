@@ -12,7 +12,7 @@ import Appointment from "./page/Appointment.js"
 import Profile from "./page/UserProfile.js"
 import store from "./redux/store.js"
 import { Provider } from 'react-redux'
-//home problem
+import ResetPassword from './page/resetPassword.js';
 
 function App() {
   return (
@@ -29,6 +29,7 @@ function App() {
           <Route path="forgotpassword" element={<Forgotpassword />} />
           <Route path="appointment" element={<Appointment />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="resetpassword" element={<ResetPassword />} />
         </Routes>
       </div>
       </Provider>

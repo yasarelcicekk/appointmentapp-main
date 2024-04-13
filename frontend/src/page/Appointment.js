@@ -90,7 +90,7 @@ const Appointment = () => {
         setTimeout(() => {
           setError(null)
         }, 2000)
-        console.error('Error during appointment:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
+        console.error('Error during appointment:', error); 
       });
 
   };

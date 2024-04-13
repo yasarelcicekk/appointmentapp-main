@@ -53,9 +53,10 @@ export default function Signin() {
     const userData = new FormData(event.currentTarget);
    const data= {
     email:userData.get("email"),
-    password: userData.get('password')
+    password: userData.get('password'),
+    rememberMe: userData.get('remember') === 'remember' ? true : false
   };
-  axios
+axios
       .post('http://localhost:27017/signin', data, { withCredentials: true })
       .then(response => {
         let data = response.data;
@@ -150,7 +151,7 @@ export default function Signin() {
           />
         </FormControl>
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox id='remember' name='remember' value="remember" color="primary" />}
                 label="Remember me"
               />
               <Button
