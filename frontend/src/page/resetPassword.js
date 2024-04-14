@@ -33,7 +33,7 @@ export default function ResetPassword() {
 
   useEffect(() => {
 
-    if(password1 != null && password2!=null)
+    if(password1 !== null && password2!==null)
     {
       if(password1==password2)
       {
@@ -44,11 +44,11 @@ export default function ResetPassword() {
         setMatchAlert("error")
       }
     }
-    else //password1 == null password2==null
+    else if (password1 == null && password2==null) //password1 == null password2==null
     {
        setMatchAlert(null)
     }
-
+    console.log("matchalert",matchAlert)
 
     // if(password1 !== null && password2 !== null) { 
     //   if (password1 === password2 &&( password1 !==null || password2!==null)) {

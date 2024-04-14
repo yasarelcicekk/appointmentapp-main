@@ -20,22 +20,24 @@ const About = () => {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '120px',
+    height: '100%',
     Padding: '20px',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Gill Sans, sans-serif'
   };
   const headingStyle = {
     color: 'black',
-    fontSize: '30px',
+    fontSize: '150%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: 'auto',
+    height: '100%',
     Padding: '50px',
     paddingRight: "10px",
     paddingLeft: "10px",
     margin: 'auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'Gill Sans, sans-serif'
   };
 
 const doctors = useSelector((state) => state.doctors.doctors);

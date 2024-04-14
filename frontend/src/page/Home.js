@@ -2,12 +2,12 @@ import React, { } from "react";
 import Typography from '@mui/material/Typography';
 import SocialIcons from '../components/SocialIcons';
 import Copyright from '../components/Copyright';
-import intimage from '../img/interior.jpg';
-import waitimage from '../img/waitingarea.jpg';
+import intimage from '../img/h1.jpeg';
+import waitimage from '../img/h2.jpeg';
 import { Box } from '@mui/material';
-import venimage from '../img/veneers.jpg';
-import impimage from '../img/implant.jpg';
-import smileimage from '../img/smile.jpg';
+import venimage from '../img/h5.jpeg';
+import impimage from '../img/h4.jpeg';
+import smileimage from '../img/h3.jpeg';
 import implant from '../img/implant2.jpg';
 import kaplama from '../img/kaplama.jpg';
 import imlantimage from '../img/implantdent.jpg';
@@ -121,7 +121,7 @@ You can make an appointment on our website by registering and logging in now
         mt: 5
       }}>
 
-        <img className='boxImg' src={intimage} alt="Interior" style={{ marginRight: '20px', borderRadius: '10px', width: '48%' }} />
+        <img className='boxImg' src={intimage} alt="Interior" style={{ marginRight: '20px', borderRadius: '10px', width: '40rem' , height:'30rem' }} />
 
         <Box
           className='boxText'
@@ -167,7 +167,7 @@ You can make an appointment on our website by registering and logging in now
             The Care, Attention And Service You Deserve</Typography>
           At Hermes London Dental Clinic, we focus on providing clients with the best experience during each visit. We offer both routine and cosmetic dentistry in the heart of Central London near both Victoria and Pimlico. We have a friendly team of cosmetic dentists, dental hygienists and private orthodontists who provide treatments in a clean and comfortable environment. Our dentists and other experts put your needs first by putting you in full control of your oral hygiene by showing images and providing a detailed explanation of your dental needs. We provide treatments you fully understand with a very preventative approach to ensure your teeth and treatments last longer. Our dentists will explain your options and help you choose the treatment plan that best suits your condition. We also provide immediate treatment to patients who require an emergency dentist in London and facial aesthetic treatment such as Dermal Fillers.
         </Box>
-         <img className='boxImg' src={waitimage} alt="Interior" style={{marginRight: '20px', borderRadius: '10px', width: '48%' }} />
+         <img className='boxImg' src={waitimage} alt="Interior" style={{marginRight: '20px', borderRadius: '10px',  width: '40rem' , height:'30rem' }} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <div className="gallery" style={{ display: 'flex', width: '100%' }}>
@@ -227,8 +227,8 @@ You can make an appointment on our website by registering and logging in now
               component='img'
               src={impimage}
               sx={{
-                width: '120%',
-                height: '120%',
+                width: '101%',
+                height: '101%',
               }}
             />
             <CardContent>

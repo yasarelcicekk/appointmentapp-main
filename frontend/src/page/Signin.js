@@ -28,6 +28,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import "./page.css"
 import { useCookies } from "react-cookie";
+import loginImg from '../img/s1.jpeg';
 
 
 const defaultTheme = createTheme();
@@ -87,7 +88,7 @@ axios
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://www.ankaraicmimarlik.com/uploads/642/642-4660.webp?v=v2022.10.13-002)',
+            backgroundImage: `url(${loginImg})`,  
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
