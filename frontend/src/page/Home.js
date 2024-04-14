@@ -8,9 +8,9 @@ import { Box } from '@mui/material';
 import venimage from '../img/h5.jpeg';
 import impimage from '../img/h4.jpeg';
 import smileimage from '../img/h3.jpeg';
-import implant from '../img/implant2.jpg';
-import kaplama from '../img/kaplama.jpg';
-import imlantimage from '../img/implantdent.jpg';
+import implant from '../img/h6.jpeg';
+import kaplama from '../img/h7.jpeg';
+import imlantimage from '../img/h8.jpeg';
 import './page.css'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
