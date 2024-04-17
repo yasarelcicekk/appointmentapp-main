@@ -19,6 +19,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import axios from 'axios'
 
 const defaultTheme = createTheme();
 
@@ -26,45 +27,29 @@ export default function ResetPassword() {
   const [matchAlert, setMatchAlert] = useState(null);
   const [passwordChangeAlert, setPasswordChangeAlert] = useState(null); 
   const [showPassword, setShowPassword] = useState(false);
-  const [password1, setShowPassword1] = useState(null);
-  const [password2, setShowPassword2] = useState(null);
+  const [password1, setPassword1] = useState(null);
+  const [password2, setPassword2] = useState(null);
   const [newPassword, setNewPassword] = useState(null);
   const handleClickShowPassword = () => setShowPassword((showPassword) => !showPassword);
 
   useEffect(() => {
 
-    if(password1 !== null && password2!==null)
+    if(password1 != null && password2!=null)
     {
       if(password1==password2)
       {
         setMatchAlert("success")
+        setNewPassword(password1)
       }
       else //password1 !== password2
       {
         setMatchAlert("error")
       }
     }
-    else if (password1 == null && password2==null) //password1 == null password2==null
+    else //password1 == null password2==null
     {
        setMatchAlert(null)
     }
-    console.log("matchalert",matchAlert)
-
-    // if(password1 !== null && password2 !== null) { 
-    //   if (password1 === password2 &&( password1 !==null || password2!==null)) {
-    //     setMatchAlert("success");
-    //   } 
-    //   else if(password1 !== password2) 
-    //   {
-    //     setMatchAlert("error")
-    //   }
-    //   else {
-    //     setMatchAlert(null)
-    //   }
-    // }
-    // else{
-    //   setMatchAlert(null)
-    // }
    
   }, [password1, password2]);
 
@@ -72,12 +57,26 @@ export default function ResetPassword() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (matchAlert === "error") {
-      setPasswordChangeAlert("failed to change password"); 
-    } else if (matchAlert === "success"){ 
-      setPasswordChangeAlert("password changed successfully"); 
-      setNewPassword(password1);
+    if (matchAlert === "success") {
+      setPasswordChangeAlert("success"); 
       console.log('new password:', newPassword)
+      const data = {newPassword:newPassword};
+      axios
+      .post('http://localhost:27017/resetPassword', data, { withCredentials: true })
+      .then(response => {
+        let data = response.data;
+        if (data) {
+          console.log('password reset successful:', data);
+        } else {
+          console.error('password reset failed:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error during reseting password:', error);
+      });
+    } 
+    else if (matchAlert === "error"){ 
+      setPasswordChangeAlert("error"); 
       }
   };
 
@@ -109,7 +108,7 @@ export default function ResetPassword() {
   <OutlinedInput
     id="password1"
     value={password1}
-    onChange={(e) => setShowPassword1(e.target.value)}    
+    onChange={(e) => setPassword1(e.target.value)}    
     type={showPassword ? 'text' : 'password'}
     endAdornment={
       <InputAdornment position="end">
@@ -131,7 +130,7 @@ export default function ResetPassword() {
   <OutlinedInput
     id="password2"
     value={password2}
-    onChange={(e) => setShowPassword2(e.target.value)} 
+    onChange={(e) => setPassword2(e.target.value)} 
     type={showPassword ? 'text' : 'password'}
     endAdornment={
       <InputAdornment position="end">
@@ -168,15 +167,20 @@ export default function ResetPassword() {
 
         </Box>
 
-     {/* {matchAlert ? <Alert severity={matchAlert}>{matchAlert =="success" ? "passwords matched" : matchAlert=="error" ? "passwords don't match" : null}</Alert> : null}    */}
- 
-              
-     {/* {matchAlert===null ? null :  matchAlert == "success" ? "password matched" : "password not matching"} */}
-     {matchAlert === null ? null : matchAlert === "success" ? "password matched" : matchAlert === "error" ? "password not matching" : null}
-     {passwordChangeAlert ? <Alert severity={passwordChangeAlert}>
-  <AlertTitle>Success</AlertTitle>
-  This is a success Alert with an encouraging title.
-</Alert> : null}   
+{matchAlert && password1 && password2 ? <Alert severity={matchAlert}>{matchAlert =="success" ? "Passwords matched" : "Passwords don't match"}</Alert> : null}
+
+<br/>
+
+{passwordChangeAlert ? 
+
+passwordChangeAlert =="success" ? <Alert severity={passwordChangeAlert}>
+  <AlertTitle>Password change successful</AlertTitle>
+  You are redirected to the login page</Alert> : <Alert severity={passwordChangeAlert}> 
+  <AlertTitle>Password change unsuccessful</AlertTitle>
+  Try Again</Alert> 
+
+  : null}   
+  
         <SocialIcons />
         <hr />
         <Copyright />

@@ -57,7 +57,7 @@ exports.create = async (req, res) => {
 };
 
     //retrieve and return all Doctors/retrieve and return a single Appointment
-    exports.find=(req,res)=>{
+exports.find=(req,res)=>{
     if(req.query.id){
         const id=req.query.id;
         Appointment.findById(id)
@@ -74,7 +74,7 @@ exports.create = async (req, res) => {
             res.status(500).send({message:"Error retrieving Appointment with id "+id})
         })
     }
-    else{
+  else{
       Appointment.find()
         .then(appointment=>{
             res.send(appointment)
@@ -85,8 +85,57 @@ exports.create = async (req, res) => {
     }
         
     }
+
+exports.findDoctorAppointments=(req,res)=>{
+      if(req.query.id){
+          const id=req.query.id;
+          Appointment.findById(id)
+          .then(data=>{
+              if(!data){
+                  res.status(404).send({message:"Not found Appointment with id "+id})
+              }
+              else{
+           
+                  res.send(data)
+              }
+          })
+          .catch(err=>{
+              res.status(500).send({message:"Error retrieving Appointment with id "+id})
+          })
+      }
+    else{
+        Appointment.find()
+          .then(appointment=>{
+              res.send(appointment)
+          })
+          .catch(err=>{
+              res.status(500).send({message:err.message|| "Error occured while retrieving Appointment information"})
+          })
+      }
+          
+      }
+
+      //
+
+exports.findUserAppointments=(req,res)=>{
+  const userID = req.params.id;
+  Appointment.find({ userID: userID })
+    .then(data => {
+      if(!data){
+        res.status(404).send({message:"Not found Appointment with userID "+userID})
+      }
+      else{
+        res.send(data)
+      }
+    })
+    .catch(err => {
+      res.status(500).send({message:"Error retrieving Appointment with userID "+userID})
+    });         
+        }
+
+
     //update Doctor by id
-    exports.update=(req,res)=>{
+  exports.update=(req,res)=>{
     if(!req.body){
         return res
         .status(400)

@@ -11,10 +11,30 @@ import PinOutlinedIcon from '@mui/icons-material/PinOutlined';
 import PermContactCalendarOutlinedIcon from '@mui/icons-material/PermContactCalendarOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
+import axios from "axios"
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
-  console.log(`userprofile ${user}`);
+  console.log(`userprofile ${user.id}`);
+
+  const userID = user.id;
+
+  const data = { id: userID};
+  axios
+  .get(`http://localhost:27017/findUserAppointment/${userID}`, { withCredentials: true })
+  .then(response => {
+    let data = response.data;
+    if (data) {
+      console.log('appointment list:', data);
+    } else {
+      console.error('appointment not listed:', data);
+    }
+  })
+  .catch(error => {
+    console.error('Error during listing appointments:', error);
+  });
+
+
   return (
     <div className="profile-page">
       <div className="right-container clearfix">
@@ -53,7 +73,7 @@ const Profile = () => {
       <div className="vertical-line"></div>
       <div className="left-container clearfix">
         <h2>My Appointments</h2>
-        <Card className="card-root">
+        <Card className="card-root"> 
           <div className="card-header">
             <Typography variant="h5" component="h2">
               My Appointment

@@ -23,5 +23,7 @@ router.post(
 router.post("/", [authJwt.verifyToken]);
 router.post("/signin", controller.signin);
 router.post("/signout", controller.signout);
+router.post("/forgotPassword", controller.forgotPassword);
+router.post("/resetPassword/:token", controller.resetPassword);
 
 module.exports = router;
