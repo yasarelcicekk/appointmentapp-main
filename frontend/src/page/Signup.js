@@ -36,7 +36,7 @@ const defaultTheme = createTheme();
 
 export default function SignUp() {
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [checked, handleAgreementChange] = useState(false);
   const [isValidMail, setValidMail] = useState(null)
   const [isValidPassword, setValidPassword] = useState(null)
@@ -56,7 +56,7 @@ export default function SignUp() {
 
   const handleClickShowPassword = () => setShowPassword((showPassword) => !showPassword);
 
- 
+
   const checkedHandler = (event) => {
     handleAgreementChange(event.target.checked);
     console.log(checked)
@@ -72,64 +72,64 @@ export default function SignUp() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const userData = new FormData(event.currentTarget);
-    const data= {
-     email:userData.get("email"),
-     password: userData.get('password'),
-     tc:userData.get("TC"),
-     phoneNumber:userData.get("phonenumber")
-   };
-   console.log(data)
-   console.log(data.phoneNumber.split(" ").join(""))
-    if (checked===true) {
-      if(validator.isEmail(data.email)) {
+    const data = {
+      email: userData.get("email"),
+      password: userData.get('password'),
+      tc: userData.get("TC"),
+      phoneNumber: userData.get("phonenumber")
+    };
+    console.log(data)
+    console.log(data.phoneNumber.split(" ").join(""))
+    if (checked === true) {
+      if (validator.isEmail(data.email)) {
         setValidMail(false)
-        if(validator.isStrongPassword(data.password)) {
+        if (validator.isStrongPassword(data.password)) {
           setValidPassword(false)
-          if(validator.isMobilePhone(data.phoneNumber.split(" ").join(""))) {
+          if (validator.isMobilePhone(data.phoneNumber.split(" ").join(""))) {
             setValidPNumber(false)
             axios
-            .post('http://localhost:27017/signup', data, { withCredentials: true })
-            .then(response => {
-              var data = response.data;
-              if (data) {
-                setSuccess("Signup process successful, you are redirected to the homepage.")
-                console.log('signup process successful', data);
+              .post('http://localhost:27017/signup', data, { withCredentials: true })
+              .then(response => {
+                var data = response.data;
+                if (data) {
+                  setSuccess("Signup process successful, you are redirected to the homepage.")
+                  console.log('signup process successful', data);
+                  setTimeout(() => {
+                    navigate("/")
+                  }, 3000);
+
+                } else {
+                  setError('signup process failed');
+                  console.error('signup process failed:', data.message);
+                }
+              })
+              .catch(error => {
+                setError('Signup process failed.\nPlease make sure you are not using an email or phone number that is already in use');
                 setTimeout(() => {
-                  navigate("/")
-                }, 3000);
-                
-              } else {
-                setError('signup process failed');
-                console.error('signup process failed:', data.message);
-              }
-            })
-            .catch(error => {
-              setError('Signup process failed.\nPlease make sure you are not using an email or phone number that is already in use');
-              setTimeout(() => {
-                setError(null)
-              }, 2000)
-              console.error('Error during signup:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
-            });
-          console.log("form submitted");
+                  setError(null)
+                }, 2000)
+                console.error('Error during signup:', error); //mail veya phonemumber aynı olursa burda hata veriyor burayı ayarlayalım
+              });
+            console.log("form submitted");
           }
-          else{
+          else {
             setValidPNumber(true)
           }
-        
+
         }
         else {
           setValidPassword(true)
         }
       }
-      else{
+      else {
         setValidMail(true)
       }
-    } 
-    else if(checked===false){
-      setOpen(true); 
-      
     }
-    else{
+    else if (checked === false) {
+      setOpen(true);
+
+    }
+    else {
       console.log("alert ver:şuanda talebinizi yerine getiremiyoruz lütfen daha sonra tekrar deneyiniz.")
     }
   };
@@ -145,21 +145,65 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
+            width:'auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            border: '2px solid black',
+            padding: '15%',
+            borderRadius: '1%'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60 }}>
 
-            <HowToRegIcon  sx={{  width: 35, height: 35 }}/>
+            <HowToRegIcon sx={{ width: 35, height: 35 }} />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+              size="small"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="lastname"
+              label="Last Name"
+              name="lastname"
+              autoComplete="lastname"
+              size="small"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="tc"
+              label="TC"
+              name="tc"
+              autoComplete="tc"
+              size="small"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="age"
+              label="Age"
+              name="age"
+              autoComplete="age"
+              size="small"
+            />
             <TextField
               margin="normal"
               required
@@ -168,39 +212,35 @@ export default function SignUp() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               size="small"
-              helperText={isValidMail ? "Please enter a valid email": null}
+              helperText={isValidMail ? "Please enter a valid email" : null}
               error={isValidMail}
             />
-        
-        <FormControl fullWidth size='small' variant="outlined">
-        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            margin='normal'
-            name='password'
-            required
-          
-            type={showPassword ? 'text' : 'password'}
-            autoComplete="current-password"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  sx={{ color: "gray" }}
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            helperText={isValidPassword ? "Please use a strong password (Capital letter, mark, number)" : null}
-            error={isValidPassword}
-            label="Password"
-          />
-        </FormControl>
+            <FormControl margin='normal' fullWidth size='small' variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                name='password'
+                required
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      sx={{ color: "gray" }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                helperText={isValidPassword ? "Please use a strong password (Capital letter, mark, number)" : null}
+                error={isValidPassword}
+                label="Password"
+              />
+            </FormControl>
             <MuiPhoneNumber
               margin="normal"
               required
@@ -212,11 +252,11 @@ export default function SignUp() {
               variant='outlined'
               size="small"
               regions={'europe'}
-              defaultCountry="tr" 
-              helperText={isValidPNumber ? "Please enter a valid phone number": null}
+              defaultCountry="tr"
+              helperText={isValidPNumber ? "Please enter a valid phone number" : null}
               error={isValidPNumber}
             />
-  
+
             <Button onClick={handleDialogOpen}>KVKK Sözleşmesi</Button>
             <Dialog open={open} onClose={handleDialogClose}>
               <DialogTitle>KVKK Sözleşmesi</DialogTitle>
@@ -257,11 +297,11 @@ export default function SignUp() {
               </DialogContent>
             </Dialog>
             {success && (<Alert severity="success">
-  <AlertTitle>Your registration has been completed</AlertTitle>
-  {success}
-</Alert>)}
+              <AlertTitle>Your registration has been completed</AlertTitle>
+              {success}
+            </Alert>)}
             {error && (
-       <Alert severity="error">{error}</Alert>)}
+              <Alert severity="error">{error}</Alert>)}
             <Button
               type="submit"
               fullWidth
@@ -282,12 +322,13 @@ export default function SignUp() {
 
             </Grid>
 
-            <SocialIcons />
-            <hr />
-            <Copyright />
+
           </Box>
         </Box>
       </Container>
+      <SocialIcons />
+      <hr />
+      <Copyright />
     </ThemeProvider>
   );
 }
