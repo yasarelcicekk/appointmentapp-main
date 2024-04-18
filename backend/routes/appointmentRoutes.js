@@ -16,6 +16,9 @@ module.exports = function(app) {
 
   app.get("/findAppointment", controller.find);
 
+  app.get("/findUserAppointment/:id", controller.findUserAppointments);
+
+
   app.post("/updateAppointment/:id", controller.update);
 
   app.post("/deleteAppointment/:id",controller.delete);

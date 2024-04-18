@@ -5,29 +5,45 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockResetIcon from '@mui/icons-material/LockReset';
+import EmailIcon from '@mui/icons-material/Email';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import Alert from '@mui/material/Alert';
 import SocialIcons from '../components/SocialIcons';
 import Copyright from '../components/Copyright';
-
+import validator from "validator";
+import axios from "axios"
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const [openAlert, setOpenAlert] = useState(false);
+  const [openAlert, setOpenAlert] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const newPassword = data.get('password');
-
-    if (!newPassword) {
-      setOpenAlert(true); 
+    const userMail = new FormData(event.currentTarget);
+    console.log('Mail userMail:', userMail.get("email"))
+    const data = {
+      email: userMail.get("email"),
+    };
+    if (!data.email || !validator.isEmail(data.email)) {
+      setOpenAlert("error"); 
     } else {
-      console.log('Yeni Şifre:', newPassword);
+      setOpenAlert("success");
+      axios
+      .post('http://localhost:27017/forgotPassword', data, { withCredentials: true })
+      .then(response => {
+        let data = response.data;
+        if (data) {
+          console.log('Login successful:', data);
+        } else {
+          console.error('Login failed:', data);
+        }
+      })
+      .catch(error => {
+        console.error('Error during posting email:', error);
+      });
     }
   };
 
@@ -50,36 +66,25 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60  }}>
-            <LockResetIcon  sx={{  width: 35, height: 35}}/>
+            <EmailIcon  sx={{  width: 35, height: 35}}/>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Reset Password
+            Email
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              type="password"
-              id="password"
-              label="New Password"
-              name="password"
-              autoComplete="current-password"
+              type="email"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="current-email"
               autoFocus
               size="small"
             />
 
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="New Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              size="small"
-            />
 
             <Button
               type="submit"
@@ -92,19 +97,13 @@ export default function SignIn() {
                 color: 'white',
               }}
             >
-              Save
+              Send
             </Button>
             <Grid container="true"></Grid>
           </Box>
         </Box>
 
-        <Dialog open={openAlert} onClose={handleCloseAlert}>
-          <DialogTitle>Uyarı</DialogTitle>
-          <DialogContent>Lütfen yeni şifre girin.</DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseAlert}>Kapat</Button>
-          </DialogActions>
-        </Dialog>
+{openAlert ? <Alert variant="filled" severity={openAlert}> {openAlert == "success" ? "Email sent successfully" : "Please enter a valid email"} </Alert> : null}
         <SocialIcons />
         <hr />
         <Copyright />
