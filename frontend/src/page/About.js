@@ -40,7 +40,7 @@ const About = () => {
     fontFamily: 'Gill Sans, sans-serif'
   };
 
-const doctors = useSelector((state) => state.doctors.doctors);
+  const doctors = useSelector((state) => state.doctors.doctors);
 
   return (
     <div>
@@ -51,45 +51,45 @@ const doctors = useSelector((state) => state.doctors.doctors);
         <h2 style={brandStyle}>Our Dental Team</h2>
       </div>
       <Box container
-       className= 'aboutCardBox'
-       sx={{
-        pt: 4,
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row', md: 'row' },
-        gap: 4,
-        borderRadius: '10%'
-      }}>
-        {doctors.map(function(doctor){
-          return(
-             <Card>
-             <CardActionArea>
-               <CardMedia className='aboutCard'
-                 component='img'
-                 src={`data:image/jpg;base64,${doctor.doctorImage}`}
-                 sx={{
-                  borderRadius:"20px",
-                   width: '90%', 
-                   height: '50%',
-                   margin: 'auto',
-                   display: 'block',
-                   
-   
-                 }} 
-               />
-               <CardContent>
-                 <Typography gutterBottom variant="h4" component="div">
-                 {doctor.doctorName + " " + doctor.doctorLastname}
-                 </Typography>
-                 <Typography variant="body2" color="text.secondary">
-                   <h2> {doctor.doctorSpecialty}</h2>
-                 </Typography>
-                 <Typography variant="body2" color="text.secondary">
-                <h3> Languages spoken</h3>
-                <h5> {doctor.doctorLanguages} </h5>
-              </Typography>
-               </CardContent>
-             </CardActionArea>
-           </Card> )
+        className='aboutCardBox'
+        sx={{
+          pt: 4,
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+          gap: 4,
+          borderRadius: '10%'
+        }}>
+        {doctors.map(function (doctor) {
+          return (
+            <Card>
+              <CardActionArea>
+                <CardMedia className='aboutCard'
+                  component='img'
+                  src={`data:image/jpg;base64,${doctor.doctorImage}`}
+                  sx={{
+                    borderRadius: "20px",
+                    width: '90%',
+                    height: '50%',
+                    margin: 'auto',
+                    display: 'block',
+
+
+                  }}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h4" component="div">
+                    {doctor.doctorName + " " + doctor.doctorLastname}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <h2> {doctor.doctorSpecialty}</h2>
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <h3> Languages spoken</h3>
+                    <h5> {doctor.doctorLanguages} </h5>
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>)
         })}
       </Box>
       <SocialIcons />

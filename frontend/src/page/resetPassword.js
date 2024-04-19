@@ -25,7 +25,7 @@ const defaultTheme = createTheme();
 
 export default function ResetPassword() {
   const [matchAlert, setMatchAlert] = useState(null);
-  const [passwordChangeAlert, setPasswordChangeAlert] = useState(null); 
+  const [passwordChangeAlert, setPasswordChangeAlert] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [password1, setPassword1] = useState(null);
   const [password2, setPassword2] = useState(null);
@@ -34,10 +34,8 @@ export default function ResetPassword() {
 
   useEffect(() => {
 
-    if(password1 != null && password2!=null)
-    {
-      if(password1==password2)
-      {
+    if (password1 != null && password2 != null) {
+      if (password1 == password2) {
         setMatchAlert("success")
         setNewPassword(password1)
       }
@@ -48,9 +46,9 @@ export default function ResetPassword() {
     }
     else //password1 == null password2==null
     {
-       setMatchAlert(null)
+      setMatchAlert(null)
     }
-   
+
   }, [password1, password2]);
 
 
@@ -58,32 +56,32 @@ export default function ResetPassword() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (matchAlert === "success") {
-      setPasswordChangeAlert("success"); 
+      setPasswordChangeAlert("success");
       console.log('new password:', newPassword)
-      const data = {newPassword:newPassword};
+      const data = { newPassword: newPassword };
       axios
-      .post('http://localhost:27017/resetPassword', data, { withCredentials: true })
-      .then(response => {
-        let data = response.data;
-        if (data) {
-          console.log('password reset successful:', data);
-        } else {
-          console.error('password reset failed:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error during reseting password:', error);
-      });
-    } 
-    else if (matchAlert === "error"){ 
-      setPasswordChangeAlert("error"); 
-      }
+        .post('http://localhost:27017/resetPassword', data, { withCredentials: true })
+        .then(response => {
+          let data = response.data;
+          if (data) {
+            console.log('password reset successful:', data);
+          } else {
+            console.error('password reset failed:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Error during reseting password:', error);
+        });
+    }
+    else if (matchAlert === "error") {
+      setPasswordChangeAlert("error");
+    }
   };
 
 
 
 
-  
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -96,57 +94,57 @@ export default function ResetPassword() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60  }}>
-            <LockResetIcon  sx={{  width: 35, height: 35}}/>
+          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60 }}>
+            <LockResetIcon sx={{ width: 35, height: 35 }} />
           </Avatar>
           <Typography component="h1" variant="h5">
             Reset Password
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <FormControl variant="outlined" fullWidth margin="normal" required>
-  <InputLabel htmlFor="password1">New Password</InputLabel>
-  <OutlinedInput
-    id="password1"
-    value={password1}
-    onChange={(e) => setPassword1(e.target.value)}    
-    type={showPassword ? 'text' : 'password'}
-    endAdornment={
-      <InputAdornment position="end">
-        <IconButton
-          sx={{ color: "gray" }}
-          aria-label="toggle password visibility"
-          onClick={handleClickShowPassword}
-          edge="end"
-        >
-          {showPassword ? <VisibilityOff /> : <Visibility />}
-        </IconButton>
-      </InputAdornment>
-    }
-    label="New Password"
-  />
-</FormControl>
-      <FormControl variant="outlined" fullWidth margin="normal" required>
-  <InputLabel htmlFor="password2">New Password</InputLabel>
-  <OutlinedInput
-    id="password2"
-    value={password2}
-    onChange={(e) => setPassword2(e.target.value)} 
-    type={showPassword ? 'text' : 'password'}
-    endAdornment={
-      <InputAdornment position="end">
-        <IconButton
-          sx={{ color: "gray" }}
-          aria-label="toggle password visibility"
-          onClick={handleClickShowPassword}
-          edge="end"
-        >
-          {showPassword ? <VisibilityOff /> : <Visibility />}
-        </IconButton>
-      </InputAdornment>
-    }
-    label="New Password"
-  />
-</FormControl>
+            <FormControl variant="outlined" fullWidth margin="normal" required>
+              <InputLabel htmlFor="password1">New Password</InputLabel>
+              <OutlinedInput
+                id="password1"
+                value={password1}
+                onChange={(e) => setPassword1(e.target.value)}
+                type={showPassword ? 'text' : 'password'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      sx={{ color: "gray" }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="New Password"
+              />
+            </FormControl>
+            <FormControl variant="outlined" fullWidth margin="normal" required>
+              <InputLabel htmlFor="password2">New Password</InputLabel>
+              <OutlinedInput
+                id="password2"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                type={showPassword ? 'text' : 'password'}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      sx={{ color: "gray" }}
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="New Password"
+              />
+            </FormControl>
 
             <Button
               type="submit"
@@ -167,20 +165,20 @@ export default function ResetPassword() {
 
         </Box>
 
-{matchAlert && password1 && password2 ? <Alert severity={matchAlert}>{matchAlert =="success" ? "Passwords matched" : "Passwords don't match"}</Alert> : null}
+        {matchAlert && password1 && password2 ? <Alert severity={matchAlert}>{matchAlert == "success" ? "Passwords matched" : "Passwords don't match"}</Alert> : null}
 
-<br/>
+        <br />
 
-{passwordChangeAlert ? 
+        {passwordChangeAlert ?
 
-passwordChangeAlert =="success" ? <Alert severity={passwordChangeAlert}>
-  <AlertTitle>Password change successful</AlertTitle>
-  You are redirected to the login page</Alert> : <Alert severity={passwordChangeAlert}> 
-  <AlertTitle>Password change unsuccessful</AlertTitle>
-  Try Again</Alert> 
+          passwordChangeAlert == "success" ? <Alert severity={passwordChangeAlert}>
+            <AlertTitle>Password change successful</AlertTitle>
+            You are redirected to the login page</Alert> : <Alert severity={passwordChangeAlert}>
+            <AlertTitle>Password change unsuccessful</AlertTitle>
+            Try Again</Alert>
 
-  : null}   
-  
+          : null}
+
         <SocialIcons />
         <hr />
         <Copyright />

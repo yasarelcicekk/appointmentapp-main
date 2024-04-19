@@ -28,22 +28,22 @@ export default function SignIn() {
       email: userMail.get("email"),
     };
     if (!data.email || !validator.isEmail(data.email)) {
-      setOpenAlert("error"); 
+      setOpenAlert("error");
     } else {
       setOpenAlert("success");
       axios
-      .post('http://localhost:27017/forgotPassword', data, { withCredentials: true })
-      .then(response => {
-        let data = response.data;
-        if (data) {
-          console.log('Login successful:', data);
-        } else {
-          console.error('Login failed:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error during posting email:', error);
-      });
+        .post('http://localhost:27017/forgotPassword', data, { withCredentials: true })
+        .then(response => {
+          let data = response.data;
+          if (data) {
+            console.log('Login successful:', data);
+          } else {
+            console.error('Login failed:', data);
+          }
+        })
+        .catch(error => {
+          console.error('Error during posting email:', error);
+        });
     }
   };
 
@@ -52,7 +52,7 @@ export default function SignIn() {
   };
 
 
-  
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -65,8 +65,8 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60  }}>
-            <EmailIcon  sx={{  width: 35, height: 35}}/>
+          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60 }}>
+            <EmailIcon sx={{ width: 35, height: 35 }} />
           </Avatar>
           <Typography component="h1" variant="h5">
             Email
@@ -103,7 +103,7 @@ export default function SignIn() {
           </Box>
         </Box>
 
-{openAlert ? <Alert variant="filled" severity={openAlert}> {openAlert == "success" ? "Email sent successfully" : "Please enter a valid email"} </Alert> : null}
+        {openAlert ? <Alert variant="filled" severity={openAlert}> {openAlert == "success" ? "Email sent successfully" : "Please enter a valid email"} </Alert> : null}
         <SocialIcons />
         <hr />
         <Copyright />

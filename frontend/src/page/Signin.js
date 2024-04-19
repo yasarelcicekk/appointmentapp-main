@@ -35,7 +35,7 @@ const defaultTheme = createTheme();
 
 export default function Signin() {
   const dispatch = useDispatch();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [cookies] = useCookies([]);
@@ -52,12 +52,12 @@ export default function Signin() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const userData = new FormData(event.currentTarget);
-   const data= {
-    email:userData.get("email"),
-    password: userData.get('password'),
-    rememberMe: userData.get('remember') === 'remember' ? true : false
-  };
-axios
+    const data = {
+      email: userData.get("email"),
+      password: userData.get('password'),
+      rememberMe: userData.get('remember') === 'remember' ? true : false
+    };
+    axios
       .post('http://localhost:27017/signin', data, { withCredentials: true })
       .then(response => {
         let data = response.data;
@@ -75,12 +75,12 @@ axios
         console.error('Error during login:', error);
       });
   }
-  
+
 
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container = "true" component="main" sx={{ height: '100vh' }}>
+      <Grid container="true" component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
           item="true"
@@ -88,7 +88,7 @@ axios
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${loginImg})`,  
+            backgroundImage: `url(${loginImg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -103,15 +103,15 @@ axios
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'black' , width: 60, height: 60 }}>
-              <ExitToAppIcon  sx={{  width: 35, height: 35 }}/>
+            <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60 }}>
+              <ExitToAppIcon sx={{ width: 35, height: 35 }} />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
             {error && (
-       <Alert severity="error">{error}</Alert>)}
-            
+              <Alert severity="error">{error}</Alert>)}
+
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
@@ -124,33 +124,33 @@ axios
                 autoFocus
                 size='small'
               />
-                 <FormControl fullWidth size='small' variant="outlined">  
-<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            margin='normal'
-            name='password'
-            label="Password"
-						 size='small'
-						fullWidth
-            required
-           autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
-           
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  sx={{ color: "gray" }}
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end"
-                >
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+              <FormControl fullWidth size='small' variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  margin='normal'
+                  name='password'
+                  label="Password"
+                  size='small'
+                  fullWidth
+                  required
+                  autoComplete="current-password"
+                  type={showPassword ? 'text' : 'password'}
+
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        sx={{ color: "gray" }}
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
               <FormControlLabel
                 control={<Checkbox id='remember' name='remember' value="remember" color="primary" />}
                 label="Remember me"
@@ -169,7 +169,7 @@ axios
               >
                 Sign In
               </Button>
-              <Grid container = "true">
+              <Grid container="true">
                 <Grid className='linkBox' item="true" xs>
                   <RouterLink className='link' to="/Forgotpassword" variant="body2">
                     {"Forgot Password"}

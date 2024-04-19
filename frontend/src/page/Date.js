@@ -53,7 +53,7 @@ const AppointmentForm = () => {
     setOpenDialog(false);
   };
 
-  const today = new Date(); 
+  const today = new Date();
 
   return (
     <Container
@@ -119,7 +119,7 @@ const AppointmentForm = () => {
           sx={{
             mt: 3,
             mb: 2,
-            backgroundColor: 'black', 
+            backgroundColor: 'black',
             color: 'white',
           }}
         >

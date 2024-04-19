@@ -116,38 +116,38 @@ const Home = () => {
         display: 'flex',
         flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
         justifyContent: 'space-between',
-        alignItems: { xs: 'center', sm: 'left', md: 'left'},
+        alignItems: { xs: 'center', sm: 'left', md: 'left' },
         ml: 3,
         mt: 5
       }}>
 
-        <img className='boxImg' src={intimage} alt="Interior" style={{marginLeft: '50px', borderRadius: '10px', width: '40%', height: '40%' }} />
+        <img className='boxImg' src={intimage} alt="Interior" style={{ marginLeft: '1.5%', borderRadius: '10px', width: '45%', height: '40%' }} />
 
         <Box
           className='boxText'
           align="right"
           style={{
-            width: '48%',
+            width: '45%',
             fontSize: '1.4vw',
             fontFamily: 'Gill Sans, sans-serif',
             textAlign: 'center',
-            marginRight:'3%', 
+            marginRight: '2%',
             lineHeight: "1.5",
             letterSpacing: "0.00938em"
 
           }}>
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em',fontWeight: "bold"  }}>
+          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
             The Care, Attention, and Service You Deserve at KADYAS Dental Clinic
           </Typography>
           At KADYAS Dental Clinic, we are committed to providing our clients with an exceptional experience during each visit. We offer a comprehensive range of both routine and cosmetic dentistry services. Our friendly team consists of skilled cosmetic dentists, dental hygienists, and private orthodontists, all dedicated to delivering top-notch treatments in a clean and comfortable environment.
           Putting Your Needs First – A Personalized Approach to Your Oral Health
-          
+
           Our priority is your oral health and satisfaction. Our dentists and experts always put you in full control of your oral hygiene by providing clear visual images and detailed explanations of your dental needs. We take a preventative approach to ensure the longevity of your teeth and treatments.
-            UUnderstanding Your Treatment Options – Transparent and Comprehensive Care
-          
+          UUnderstanding Your Treatment Options – Transparent and Comprehensive Care
+
           We believe in transparency and will thoroughly explain all your treatment options. Our team will assist you in choosing the best treatment plan tailored to your individual condition.
           Emergency Dental Services – Immediate Care When You Need It Most
-          
+
           In addition to routine and cosmetic dentistry, we also offer immediate emergency dental services for patients requiring urgent care, including fillers and other treatments.
         </Box>
       </Box>
@@ -168,11 +168,12 @@ const Home = () => {
         <Box
           className='boxText'
           style={{
-            width: '48%',
+            width: '45%',
             fontSize: '1.4vw',
             fontFamily: 'Gill Sans, sans-serif',
             textAlign: 'center',
-            marginLeft:'2%', 
+            marginLeft: '2%',
+            marginRight: '2%',
             lineHeight: "1.5",
             letterSpacing: "0.00938em"
           }}>
@@ -180,17 +181,17 @@ const Home = () => {
             The Care, Attention, and Service You Deserve at KADYAS Dental Clinic
           </Typography>
           At KADYAS Dental Clinic, we are committed to providing our clients with an exceptional experience during each visit. We offer a comprehensive range of both routine and cosmetic dentistry services. Our friendly team consists of skilled cosmetic dentists, dental hygienists, and private orthodontists, all dedicated to delivering top-notch treatments in a clean and comfortable environment.
-            Putting Your Needs First
-         
+          Putting Your Needs First – A Personalized Approach to Your Oral Health
+
           Our priority is your oral health and satisfaction. Our dentists and experts always put you in full control of your oral hygiene by providing clear visual images and detailed explanations of your dental needs. We take a preventative approach to ensure the longevity of your teeth and treatments.
-            Understanding Your Treatment Options
-          
+          UUnderstanding Your Treatment Options – Transparent and Comprehensive Care
+
           We believe in transparency and will thoroughly explain all your treatment options. Our team will assist you in choosing the best treatment plan tailored to your individual condition.
-            Emergency Dental Services
-         
+          Emergency Dental Services – Immediate Care When You Need It Most
+
           In addition to routine and cosmetic dentistry, we also offer immediate emergency dental services for patients requiring urgent care, including fillers and other treatments.
         </Box>
-        <img className='boxImg' src={waitimage} alt="Interior" style={{ marginRight: '50px', borderRadius: '10px', width: '40%', height: '50%' }} />
+        <img className='boxImg' src={waitimage} alt="Interior" style={{ marginRight: '1.5%', borderRadius: '10px', width: '45%', height: '40%' }} />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <div className="gallery" style={{ display: 'flex', width: '100%' }}>

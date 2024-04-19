@@ -78,7 +78,7 @@ const Contact = () => {
 
     <div>
       <form onSubmit={handleSubmit}>
-        <Box  className='contactMap' sx={{
+        <Box className='contactMap' sx={{
           display: 'flex',
           justifyContent: 'space-around',
           paddingTop: '7px',
@@ -86,7 +86,7 @@ const Contact = () => {
 
         }}>
           <Box
-          className='contactMapResponsive'
+            className='contactMapResponsive'
             sx={{
               color: 'black',
               width: '45%',
@@ -94,10 +94,10 @@ const Contact = () => {
               flexDirection: 'column-reverse',
               margin: 'auto',
             }}>
-               <Map />
-            </Box>
-           
-          
+            <Map />
+          </Box>
+
+
           <Box className='contactPageTextfield' sx={{
             color: 'black',
             width: '40%',
@@ -188,7 +188,7 @@ const Contact = () => {
 
         <Box
 
-          
+
           sx={{
             textAlign: 'center',
             margin: '50px',
@@ -198,19 +198,19 @@ const Contact = () => {
             flexDirection: 'column',
             gap: '20px',
             flexWrap: 'wrap',
-            margin: { xs:"auto", sm:"auto"}
+            margin: { xs: "auto", sm: "auto" }
           }}
         >
-          <Box  className='contactPageİnfo' 
-          sx={{
-            pt: 4,
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row', md: 'row' },
-            justifyContent: 'space-between',
-            gap: '20px',
-            margin: { xs:"auto", sm:"auto"}
-          }}>
-            
+          <Box className='contactPageİnfo'
+            sx={{
+              pt: 4,
+              display: 'flex',
+              flexDirection: { xs: 'column', sm: 'row', md: 'row' },
+              justifyContent: 'space-between',
+              gap: '20px',
+              margin: { xs: "auto", sm: "auto" }
+            }}>
+
 
             <div style={{ border: '1px solid lightblue', padding: '20px', borderRadius: '10px', flex: '1', }}>
               <h1 style={{ color: 'lightblue', fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5em', marginBottom: '0.5em' }}>
@@ -228,7 +228,7 @@ const Contact = () => {
 
             <div style={{ border: '1px solid lightblue', padding: '20px', borderRadius: '10px', flex: '1' }}>
               <h1 style={{ color: 'lightblue', fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5em', marginBottom: '0.5em' }}>Opening Hours</h1>
-              <h3 style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1em', marginBottom: '0.5em' }}>The Dental Centre Monday to Friday 9:00am – 5:30pm</h3>
+              <h3 style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1em', marginBottom: '0.5em' }}>The Dental Centre Monday to Friday 9:00am – 5:00pm</h3>
             </div>
 
             <div style={{ border: '1px solid lightblue', padding: '20px', borderRadius: '10px', flex: '1', fontFamily: 'Gill Sans, sans-serif' }}>
