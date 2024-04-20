@@ -17,9 +17,12 @@ import ResetPassword from './page/resetPassword.js';
 function App() {
   return (
     <>
+    {/* Provider is used to provide the Redux store */}
+
       <Provider store={store}>
       <Navbar /> 
       <div>
+        {/* Navigation between pages is provided using React Router */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />

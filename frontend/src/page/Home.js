@@ -111,7 +111,8 @@ const Home = () => {
         </Alert>
       </Collapse>
 
-      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5} sx={{
+      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5} 
+      sx={{
         mr: 2,
         display: 'flex',
         flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
@@ -121,7 +122,7 @@ const Home = () => {
         mt: 5
       }}>
 
-        <img className='boxImg' src={intimage} alt="Interior" style={{ marginLeft: '1.5%', borderRadius: '10px', width: '45%', height: '40%' }} />
+        <img className='homeBoxImg' src={intimage} alt="Interior"  />
 
         <Box
           className='boxText'
@@ -136,7 +137,7 @@ const Home = () => {
             letterSpacing: "0.00938em"
 
           }}>
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
+          <Typography variant="h1" className='boxTextH1' sx={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
             The Care, Attention, and Service You Deserve at KADYAS Dental Clinic
           </Typography>
           At KADYAS Dental Clinic, we are committed to providing our clients with an exceptional experience during each visit. We offer a comprehensive range of both routine and cosmetic dentistry services. Our friendly team consists of skilled cosmetic dentists, dental hygienists, and private orthodontists, all dedicated to delivering top-notch treatments in a clean and comfortable environment.
@@ -177,7 +178,7 @@ const Home = () => {
             lineHeight: "1.5",
             letterSpacing: "0.00938em"
           }}>
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
+          <Typography variant="h1" className='boxTextH1' sx={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
             The Care, Attention, and Service You Deserve at KADYAS Dental Clinic
           </Typography>
           At KADYAS Dental Clinic, we are committed to providing our clients with an exceptional experience during each visit. We offer a comprehensive range of both routine and cosmetic dentistry services. Our friendly team consists of skilled cosmetic dentists, dental hygienists, and private orthodontists, all dedicated to delivering top-notch treatments in a clean and comfortable environment.
@@ -191,7 +192,7 @@ const Home = () => {
 
           In addition to routine and cosmetic dentistry, we also offer immediate emergency dental services for patients requiring urgent care, including fillers and other treatments.
         </Box>
-        <img className='boxImg' src={waitimage} alt="Interior" style={{ marginRight: '1.5%', borderRadius: '10px', width: '45%', height: '40%' }} />
+        <img className='homeBoxImg' src={waitimage} alt="Interior" />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <div className="gallery" style={{ display: 'flex', width: '100%' }}>

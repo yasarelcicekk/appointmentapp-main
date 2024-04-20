@@ -13,42 +13,15 @@ import { useSelector } from 'react-redux';
 
 const About = () => {
 
-
-  const brandStyle = {
-    color: 'lightblue',
-    fontSize: '50px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    Padding: '20px',
-    textAlign: 'center',
-    fontFamily: 'Gill Sans, sans-serif'
-  };
-  const headingStyle = {
-    color: 'black',
-    fontSize: '150%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    Padding: '50px',
-    paddingRight: "10px",
-    paddingLeft: "10px",
-    margin: 'auto',
-    textAlign: 'center',
-    fontFamily: 'Gill Sans, sans-serif'
-  };
-
   const doctors = useSelector((state) => state.doctors.doctors);
 
   return (
     <div>
 
       <div>
-        <h2 style={brandStyle}>ABOUT US DENTAL CENTER</h2>
-        <h1 style={headingStyle}> Proudly supported by an experienced and highly skilled team of dentists in Dental Center. All our experiences combined offer you access to specialist dental care in a modern and comfortable treatment centre. Trust Dental Center for a hard working dental team ready to welcome you in a warm and friendly environment!</h1>
-        <h2 style={brandStyle}>Our Dental Team</h2>
+        <h2 className='brandStyle' >ABOUT US DENTAL CENTER</h2>
+        <h1 className='headingStyle' > Proudly supported by an experienced and highly skilled team of dentists in Dental Center. All our experiences combined offer you access to specialist dental care in a modern and comfortable treatment centre. Trust Dental Center for a hard working dental team ready to welcome you in a warm and friendly environment!</h1>
+        <h2  className='brandStyle'>Our Dental Team</h2>
       </div>
       <Box container
         className='aboutCardBox'
@@ -72,8 +45,6 @@ const About = () => {
                     height: '50%',
                     margin: 'auto',
                     display: 'block',
-
-
                   }}
                 />
                 <CardContent>
@@ -95,9 +66,7 @@ const About = () => {
       <SocialIcons />
       <hr />
       <Copyright />
-
     </div>
-
   );
 };
 
