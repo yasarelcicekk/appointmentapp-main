@@ -89,7 +89,7 @@ const Appointment = () => {
         setTimeout(() => {
           setError(null)
         }, 2000)
-        console.error('Error during appointment:', error); 
+        console.error('Error during appointment:', error);
       });
 
   };
@@ -152,8 +152,8 @@ const Appointment = () => {
                 shrink: true,
               }}
               required
-              sx={{width: '100%'}}
-     
+              sx={{ width: '100%' }}
+
 
             />
           </DemoContainer>

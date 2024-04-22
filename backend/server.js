@@ -29,7 +29,7 @@ const Role = db.role;
 const Doctor=db.doctor;
 
 db.mongoose.set('strictQuery', false)
-  .connect('mongodb+srv://kadirorhunkavraz:0kE8a5etArYYBvgb@mernappcluster0.1nf2aoq.mongodb.net/?retryWrites=true&w=majority', {
+  .connect(dbConfig.serverURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })

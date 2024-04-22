@@ -146,7 +146,7 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 2,
-            width:'auto',
+            width: 'auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -257,12 +257,12 @@ export default function SignUp() {
               error={isValidPNumber}
             />
 
-            <Button onClick={handleDialogOpen}>KVKK Sözleşmesi</Button>
+            <Button onClick={handleDialogOpen}>GDPR Agreement</Button>
             <Dialog open={open} onClose={handleDialogClose}>
-              <DialogTitle>KVKK Sözleşmesi</DialogTitle>
+              <DialogTitle>GDPR Agreement</DialogTitle>
               <DialogContent dividers>
                 <Typography variant="body1">
-                  KVKK (Kişisel Verilerin Korunması Kanunu) sözleşmeleri genellikle kurumların kendi ihtiyaçları doğrultusunda hazırlanır. Bu sözleşmeler, kişisel verilerin işlenmesi, saklanması, kullanılması ve korunması gibi konuları kapsar. Örnek bir KVKK sözleşmesi genellikle aşağıdaki gibi temel bölümleri içerir:
+                  {/* KVKK (Kişisel Verilerin Korunması Kanunu) sözleşmeleri genellikle kurumların kendi ihtiyaçları doğrultusunda hazırlanır. Bu sözleşmeler, kişisel verilerin işlenmesi, saklanması, kullanılması ve korunması gibi konuları kapsar. Örnek bir KVKK sözleşmesi genellikle aşağıdaki gibi temel bölümleri içerir:
                   Sözleşme Başlığı ve Tarafların Tanımlanması:
                   Bu kısım sözleşmenin adını, tarafları (genellikle bir işletme veya şirket ile kullanıcılar veya müşteriler arasında) ve tarafların iletişim bilgilerini belirtir.
                   Amaç:
@@ -279,7 +279,88 @@ export default function SignUp() {
                   Sözleşmenin başlangıç tarihi, süresi ve hangi koşullarda sonlanabileceği burada belirtilir.
                   Diğer Hususlar:
                   Kapsamlı KVKK sözleşmeleri, şirketin ihtiyaçlarına ve KVKK'ya uyum sağlama sürecine bağlı olarak ek bölümler de içerebilir. Bu, veri ihlali durumunda yapılacaklar, sözleşmenin revize edilmesi durumları gibi ek detaylar olabilir.
-                  KVKK sözleşmeleri şirketlerin gereksinimlerine ve KVKK'nın belirlediği standartlara göre oldukça detaylı olabilir. Bu nedenle, örnek bir KVKK sözleşmesi hazırlanırken genellikle bir hukuk uzmanından veya danışmandan destek almak önemlidir.
+                  KVKK sözleşmeleri şirketlerin gereksinimlerine ve KVKK'nın belirlediği standartlara göre oldukça detaylı olabilir. Bu nedenle, örnek bir KVKK sözleşmesi hazırlanırken genellikle bir hukuk uzmanından veya danışmandan destek almak önemlidir. */}
+                  General Data Protection Regulation (GDPR) Compliance Statement
+
+                  1. Introduction
+
+                  This General Data Protection Regulation (GDPR) Compliance Statement ("Statement") sets out the measures and practices we implement to ensure compliance with the GDPR regarding the processing of personal data.
+
+                  2. Scope
+
+                  This Statement applies to all personal data processed by [Company Name], including data processed by employees, contractors, third-party vendors, and any other parties acting on our behalf.
+
+                  3. Principles of Data Protection
+
+                  We are committed to the following principles in our data processing activities:
+                  - Lawfulness, fairness, and transparency
+                  - Purpose limitation
+                  - Data minimization
+                  - Accuracy
+                  - Storage limitation
+                  - Integrity and confidentiality
+
+                  4. Data Collection and Processing
+
+                  We collect and process personal data for the following purposes:
+                  - To provide and maintain our services
+                  - To communicate with you
+                  - To improve our services
+                  - To comply with legal obligations
+
+                  5. Legal Basis for Data Processing
+
+                  We process personal data based on one or more of the following legal bases:
+                  - Consent
+                  - Contractual necessity
+                  - Legal obligation
+                  - Vital interests
+                  - Public interest
+                  - Legitimate interests
+
+                  6. Data Subject Rights
+
+                  You have the following rights regarding your personal data:
+                  - Right to access
+                  - Right to rectification
+                  - Right to erasure
+                  - Right to restrict processing
+                  - Right to data portability
+                  - Right to object
+
+                  7. Data Security Measures
+
+                  We implement appropriate technical and organizational measures to ensure the security of personal data, including:
+                  - Encryption of personal data
+                  - Regular security assessments
+                  - Training for employees on data protection
+
+                  8. Data Breach Notification
+
+                  In the event of a data breach that is likely to result in a risk to the rights and freedoms of individuals, we will notify the relevant supervisory authority and affected individuals without undue delay.
+
+                  9. Data Transfer
+
+                  We may transfer personal data to third countries or international organizations only if appropriate safeguards are in place, such as standard contractual clauses or an adequacy decision.
+
+                  10. Data Retention
+
+                  We retain personal data only for as long as necessary to fulfill the purposes for which it was collected, unless a longer retention period is required by law.
+
+                  11. Contact Information
+
+                  For any questions or concerns regarding this GDPR Compliance Statement or our data protection practices, please contact:
+
+                  [Company Name]
+                  [Address]
+                  [City, State, ZIP Code]
+                  [Email Address]
+                  [Phone Number]
+
+                  12. Changes to this Statement
+
+                  We reserve the right to update this GDPR Compliance Statement to reflect changes in our data processing practices or to comply with legal requirements. Any updates will be posted on our website.
+
 
                 </Typography>
                 <FormControlLabel
@@ -291,9 +372,9 @@ export default function SignUp() {
                       onChange={checkedHandler}
                     />
                   }
-                  label="KVKK Sözleşmesini Okudum ve Onaylıyorum"
+                  label="I Have Read and Accept the GDPR Agreement"
                 />
-                <Button onClick={handleDialogClose}>Kapat</Button>
+                <Button onClick={handleDialogClose}>Close</Button>
               </DialogContent>
             </Dialog>
             {success && (<Alert severity="success">
@@ -317,12 +398,8 @@ export default function SignUp() {
             </Button>
             <Grid container="true">
               <Grid item="true" xs>
-
               </Grid>
-
             </Grid>
-
-
           </Box>
         </Box>
       </Container>

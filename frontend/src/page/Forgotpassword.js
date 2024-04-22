@@ -61,8 +61,8 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60  }}>
-            <EmailIcon  sx={{  width: 35, height: 35}}/>
+          <Avatar sx={{ m: 1, bgcolor: 'black', width: 60, height: 60 }}>
+            <EmailIcon sx={{ width: 35, height: 35 }} />
           </Avatar>
           <Typography component="h1" variant="h5">
             Email
@@ -99,7 +99,7 @@ export default function SignIn() {
           </Box>
         </Box>
 
-{openAlert ? <Alert variant="filled" severity={openAlert}> {openAlert == "success" ? "Email sent successfully" : "Please enter a valid email"} </Alert> : null}
+        {openAlert ? <Alert variant="filled" severity={openAlert}> {openAlert == "success" ? "Email sent successfully" : "Please enter a valid email"} </Alert> : null}
         <SocialIcons />
         <hr />
         <Copyright />

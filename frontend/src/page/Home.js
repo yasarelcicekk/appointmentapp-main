@@ -111,44 +111,44 @@ const Home = () => {
         </Alert>
       </Collapse>
 
-      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5} sx={{
+      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5} 
+      sx={{
         mr: 2,
         display: 'flex',
         flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
         justifyContent: 'space-between',
-        alignItems: { xs: 'center', sm: 'left', md: 'left'},
+        alignItems: { xs: 'center', sm: 'left', md: 'left' },
         ml: 3,
         mt: 5
       }}>
 
-        <img className='boxImg' src={intimage} alt="Interior" style={{marginLeft: '50px', borderRadius: '10px', width: '40%', height: '40%' }} />
+        <img className='homeBoxImg' src={intimage} alt="Interior"  />
 
         <Box
           className='boxText'
           align="right"
           style={{
-            width: '48%',
+            width: '45%',
             fontSize: '1.4vw',
             fontFamily: 'Gill Sans, sans-serif',
             textAlign: 'center',
+            marginRight: '2%',
             lineHeight: "1.5",
             letterSpacing: "0.00938em"
+
           }}>
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold"  }}>
+          <Typography variant="h1" className='boxTextH1' sx={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
             The Care, Attention, and Service You Deserve at KADYAS Dental Clinic
           </Typography>
           At KADYAS Dental Clinic, we are committed to providing our clients with an exceptional experience during each visit. We offer a comprehensive range of both routine and cosmetic dentistry services. Our friendly team consists of skilled cosmetic dentists, dental hygienists, and private orthodontists, all dedicated to delivering top-notch treatments in a clean and comfortable environment.
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
           Putting Your Needs First – A Personalized Approach to Your Oral Health
-          </Typography>
+
           Our priority is your oral health and satisfaction. Our dentists and experts always put you in full control of your oral hygiene by providing clear visual images and detailed explanations of your dental needs. We take a preventative approach to ensure the longevity of your teeth and treatments.
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
-            UUnderstanding Your Treatment Options – Transparent and Comprehensive Care
-          </Typography>
+          UUnderstanding Your Treatment Options – Transparent and Comprehensive Care
+
           We believe in transparency and will thoroughly explain all your treatment options. Our team will assist you in choosing the best treatment plan tailored to your individual condition.
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
           Emergency Dental Services – Immediate Care When You Need It Most
-          </Typography>
+
           In addition to routine and cosmetic dentistry, we also offer immediate emergency dental services for patients requiring urgent care, including fillers and other treatments.
         </Box>
       </Box>
@@ -169,31 +169,30 @@ const Home = () => {
         <Box
           className='boxText'
           style={{
-            width: '48%',
+            width: '45%',
             fontSize: '1.4vw',
             fontFamily: 'Gill Sans, sans-serif',
             textAlign: 'center',
+            marginLeft: '2%',
+            marginRight: '2%',
             lineHeight: "1.5",
             letterSpacing: "0.00938em"
           }}>
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
+          <Typography variant="h1" className='boxTextH1' sx={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
             The Care, Attention, and Service You Deserve at KADYAS Dental Clinic
           </Typography>
           At KADYAS Dental Clinic, we are committed to providing our clients with an exceptional experience during each visit. We offer a comprehensive range of both routine and cosmetic dentistry services. Our friendly team consists of skilled cosmetic dentists, dental hygienists, and private orthodontists, all dedicated to delivering top-notch treatments in a clean and comfortable environment.
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
-            Putting Your Needs First
-          </Typography>
+          Putting Your Needs First – A Personalized Approach to Your Oral Health
+
           Our priority is your oral health and satisfaction. Our dentists and experts always put you in full control of your oral hygiene by providing clear visual images and detailed explanations of your dental needs. We take a preventative approach to ensure the longevity of your teeth and treatments.
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
-            Understanding Your Treatment Options
-          </Typography>
+          UUnderstanding Your Treatment Options – Transparent and Comprehensive Care
+
           We believe in transparency and will thoroughly explain all your treatment options. Our team will assist you in choosing the best treatment plan tailored to your individual condition.
-          <Typography variant="h1" className='boxTextH1' style={{ fontFamily: 'Gill Sans, sans-serif', fontSize: '1.5vw', marginBottom: '0.5em', fontWeight: "bold" }}>
-            Emergency Dental Services
-          </Typography>
+          Emergency Dental Services – Immediate Care When You Need It Most
+
           In addition to routine and cosmetic dentistry, we also offer immediate emergency dental services for patients requiring urgent care, including fillers and other treatments.
         </Box>
-        <img className='boxImg' src={waitimage} alt="Interior" style={{ marginRight: '50px', borderRadius: '10px', width: '40%', height: '30%' }} />
+        <img className='homeBoxImg' src={waitimage} alt="Interior" />
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <div className="gallery" style={{ display: 'flex', width: '100%' }}>
