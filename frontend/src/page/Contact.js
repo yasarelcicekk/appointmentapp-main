@@ -17,42 +17,32 @@ import './page.css'
 
 const Contact = () => {
 
-  const [selectedFirstname, setSelectedFirstname] = useState('');
-  const [selectedLastname, setSelectedLastname] = useState('');
-  const [selectedPhonenumber, setSelectedPhonenumber] = useState('');
-  const [selectedEmail, setSelectedEmail] = useState('');
-  const [selectedYourmessage, setSelectedYourmessage] = useState('');
+  const [formState, setFormState] = useState({
+    firstname: '',
+    lastname: '',
+    phonenumber: '',
+    email: '',
+    yourmessage: ''
+  });
+
   const [openDialog, setOpenDialog] = useState(false);
 
-  const handleFirstnameChange = (event) => {
-    setSelectedFirstname(event.target.value);
-  };
-
-  const handleLastnameChange = (event) => {
-    setSelectedLastname(event.target.value);
-  };
-
-  const handlePhonenumberChange = (event) => {
-    setSelectedPhonenumber(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setSelectedEmail(event.target.value);
-  };
-
-  const handleYourmessageChange = (event) => {
-    setSelectedYourmessage(event.target.value);
+  const handleChange = (event) => {
+    setFormState({
+      ...formState,
+      [event.target.name]: event.target.value
+    });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (
-      !selectedFirstname ||
-      !selectedLastname ||
-      !selectedPhonenumber ||
-      !selectedEmail ||
-      !selectedYourmessage
+      !formState.firstname ||
+      !formState.lastname ||
+      !formState.phonenumber ||
+      !formState.email ||
+      !formState.yourmessage
     ) {
       setOpenDialog(true);
 
@@ -60,15 +50,8 @@ const Contact = () => {
       return;
     }
 
-    console.log(`Selected Firstname: ${selectedFirstname}`);
-    console.log(`Selected Lastname: ${selectedLastname}`);
-    console.log(`Selected Phonenumber: ${selectedPhonenumber}`);
-
-    setSelectedFirstname('');
-    setSelectedLastname('');
-    setSelectedPhonenumber('');
-    setSelectedEmail('');
-    setSelectedYourmessage('');
+    console.log(`Selected form texts: ${formState}`);
+    setFormState('')
   };
 
   const handleCloseDialog = () => {
@@ -122,7 +105,7 @@ const Contact = () => {
               autoComplete="text"
               autoFocus
               size="small"
-              onChange={handleFirstnameChange}
+              onChange={setFormState.firstname}
             />
 
             <TextField
@@ -134,7 +117,7 @@ const Contact = () => {
               name="LastName"
               autoComplete="text"
               size="small"
-              onChange={handleLastnameChange}
+              onChange={setFormState.lastname}
             />
             <TextField
               margin="normal"
@@ -145,7 +128,7 @@ const Contact = () => {
               name="PhoneNumber"
               autoComplete="number"
               size="small"
-              onChange={handlePhonenumberChange}
+              onChange={setFormState.phonenumber}
             />
             <TextField
               margin="normal"
@@ -156,7 +139,7 @@ const Contact = () => {
               name="email"
               autoComplete="email"
               size="small"
-              onChange={handleEmailChange}
+              onChange={setFormState.email}
 
             />
             <TextField
@@ -168,7 +151,7 @@ const Contact = () => {
               name="YourMessage"
               autoComplete="YourMessage"
               size="large"
-              onChange={handleYourmessageChange}
+              onChange={setFormState.yourmessage}
             />
             <Button
               type="submit"

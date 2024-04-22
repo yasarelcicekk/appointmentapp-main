@@ -14,44 +14,40 @@ import SocialIcons from '../components/SocialIcons';
 import Copyright from '../components/Copyright';
 import validator from "validator";
 import axios from "axios"
+import {API_URL} from "../../../backend/config/api.config"
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [openAlert, setOpenAlert] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const userMail = new FormData(event.currentTarget);
-    console.log('Mail userMail:', userMail.get("email"))
     const data = {
       email: userMail.get("email"),
     };
     if (!data.email || !validator.isEmail(data.email)) {
       setOpenAlert("error"); 
-    } else {
+      return;
+    } 
+
       setOpenAlert("success");
-      axios
-      .post('http://localhost:27017/forgotPassword', data, { withCredentials: true })
-      .then(response => {
-        let data = response.data;
-        if (data) {
-          console.log('Login successful:', data);
-        } else {
-          console.error('Login failed:', data);
-        }
-      })
-      .catch(error => {
-        console.error('Error during posting email:', error);
-      });
+
+
+  try {
+    const response = await axios.post(`${API_URL}/forgotPassword`, data, { withCredentials: true });
+    let responseData = response.data;
+    if (!responseData) {
+      console.error('Login failed:', responseData);
+      // Show error to user
     }
+  } catch (error) {
+    console.error('Error during posting email:', error);
+    // Show error to user
+  }
+    
   };
-
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
-
-
   
   return (
     <ThemeProvider theme={defaultTheme}>

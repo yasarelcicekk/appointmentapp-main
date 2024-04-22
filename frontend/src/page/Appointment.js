@@ -25,7 +25,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
-
+import {API_URL} from "../../../backend/config/api.config"
 
 
 const Appointment = () => {
@@ -64,13 +64,12 @@ const Appointment = () => {
     console.log("auth user appointment 63:", user)
     console.log("user.id appointment 64", user.id)
     const data = {
-      date: formattedDate + " " + formattedTime,
+      date: `${formattedDate} ${formattedTime}`,
       doctorName: selectedDoctor.split(' ')[0],
       userID: user.id
     };
-    console.log("Appointment", data)
     axios
-      .post('http://localhost:27017/addAppointment', data, { withCredentials: true })
+      .post(`${API_URL}/addAppointment`, data, { withCredentials: true })
       .then(response => {
         var data = response.data;
         if (data) {

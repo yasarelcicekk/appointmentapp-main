@@ -4,13 +4,16 @@ import Link from '@mui/material/Link';
 
 
 function Copyright(props) {
+
+  const currentYear = new Date().getFullYear();
+
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
         <Link color="inherit" href="/">
           KADYAS
         </Link>{' '}
-        {new Date().getFullYear()}
+        {currentYear}
         {'.'}
       </Typography>
     );

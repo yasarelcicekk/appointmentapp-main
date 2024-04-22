@@ -26,17 +26,10 @@ function useCheckUserSession() {
 
    const user = useSelector((state) => state.auth.user);
 
-  const [loggedIn, setLoggedIn] = useState(!!user);
+  const [loggedIn, setLoggedIn] = useState(Boolean(user));
   
   useEffect(() => {
-    if(user)
-    {
-      setLoggedIn(true)
-    }
-    else {
-      setLoggedIn(false);
-    }
-    
+    setLoggedIn(Boolean(user)); 
   }, [user]);
 
   return loggedIn;
