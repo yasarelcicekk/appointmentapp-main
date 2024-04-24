@@ -14,7 +14,7 @@ import SocialIcons from '../components/SocialIcons';
 import Copyright from '../components/Copyright';
 import validator from "validator";
 import axios from "axios"
-import {API_URL} from "../../../backend/config/api.config"
+import {API_URL} from "../config/api.config"
 
 const defaultTheme = createTheme();
 
