@@ -120,6 +120,7 @@ exports.findDoctorAppointments=(req,res)=>{
 exports.findUserAppointments=(req,res)=>{
   const userID = req.params.id;
   Appointment.find({ userID: userID })
+  .populate('DoctorID')
     .then(data => {
       if(!data){
         res.status(404).send({message:"Not found Appointment with userID "+userID})

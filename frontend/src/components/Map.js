@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import markerIconPng from 'path-to-marker-icon.png';
+import markerIconPng from 'leaflet/dist/images/marker-icon.png';
 import { Icon } from 'leaflet';
-import './Map.css';
+import './map.css';
+import "leaflet/dist/leaflet.css";
 
 const markerIcon = new Icon({iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41]});
 
