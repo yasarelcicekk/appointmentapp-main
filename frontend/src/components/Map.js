@@ -11,7 +11,7 @@ const Map = ({ latitude = 41.04836857387819, longitude = 28.8968787 }) => {
   const mapRef = useRef(null); 
 
   return(
-    <MapContainer className="map-responsive" center={[latitude, longitude]} zoom={17} ref={mapRef}>
+    <MapContainer className="map-responsive" center={[latitude, longitude]} zoom={10} ref={mapRef}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker icon={markerIcon} position={[latitude, longitude]}>
         <Popup>

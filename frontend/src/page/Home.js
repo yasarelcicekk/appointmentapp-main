@@ -31,7 +31,8 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
 
-
+  const whatsappNumber = "+905368943538"; 
+  
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -290,12 +291,13 @@ const Home = () => {
             </CardContent>
           </CardActionArea>
         </Card>
+        
       </Box>
 
-      <SocialIcons />
+      <SocialIcons  whatsappNumber={whatsappNumber} />
       <hr />
       <Copyright />
-
+ 
     </div>
   );
 };
