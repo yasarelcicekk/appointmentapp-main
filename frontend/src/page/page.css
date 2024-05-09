@@ -24,7 +24,7 @@
 .link:hover {
   color: #9C27B0;
 }
-
+/******* CONTACT İNFO **********/
 .contactBox {
   border: 1px solid lightblue;
   padding: 20px;
@@ -44,7 +44,7 @@
   font-size: 1em;
   margin-bottom: 0.5em;
 }
-
+/******* ABOUT İNFO **********/
 .brandStyle  {
   color: lightblue;
   font-size: 40px;
@@ -70,7 +70,7 @@
   text-align: center;
   font-family: 'Gill Sans', sans-serif;
 }
-
+/****** HOME APPOİNTMENT ALERT ******/
 .homeAlert {
   width: 92%;
   border: 0.5px solid #121212 !important;
@@ -104,8 +104,6 @@
   .contactMap {
     flex-direction: column-reverse !important;
   }
-
-
 
   .aboutCardBox {
     flex-direction: column-reverse !important;
@@ -152,7 +150,7 @@
     margin-right: 15% !important;
   }
 }
-
+/********* USER PROFİLE CONTAİNER ********/
 .left-container h2 {
   font-size: 24px;
   margin-bottom: 10px;
@@ -194,18 +192,22 @@
   display: flex;
   justify-content: space-between;
 }
+.homeAlert .Toastify__toast-container {
+  width: 300px; 
+  height: 100px; 
+}
 
 .left-container,
 .right-container {
-  width: 48%;
-  padding: 4%;
-  background-color: #ffff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px;
-  margin-top: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
-  margin-bottom: 20px;
+  width: 48% !important;
+  padding: 4% !important;
+  background-color: #ffff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 10px !important;
+  margin-top: 2% !important;
+  margin-left: 2% !important;
+  margin-right: 2% !important;
+  margin-bottom: 20px !important;
 
 }
 
@@ -218,7 +220,10 @@
 .input-group label {
   margin-bottom: 5px;
 }
-
+.input-group input {
+  padding: 5px; 
+}
+ 
 @media (max-width: 768px) {
   .profile-page {
     flex-direction: column;
@@ -281,7 +286,7 @@
   background-color: white !important;
 }
 
-
+/****** HOME İMAGE h6-h7-h8 *******/
 .gallery {
   display: flex;
   gap: 1rem;
@@ -290,7 +295,7 @@
   margin-left: 2%;
   margin-right: 2%;
 }
-
+ 
 .gallery>div {
   flex: 1;
   overflow: hidden;
@@ -306,3 +311,7 @@
   transform: scale(1.4) rotate(12deg);
 
 }
+
+
+
+

@@ -28,11 +28,13 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Cookies, useCookies } from "react-cookie";
 import { login, logout } from "../redux/authActions";
 import { useNavigate } from "react-router-dom";
+// import { ToastContainer, toast } from 'react-toastify';
+// import { Button } from '@mui/material';
 
 const Home = () => {
 
-  const whatsappNumber = "+905368943538"; 
-  
+  const whatsappNumber = "+905368943538";
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -92,10 +94,19 @@ const Home = () => {
     }
   }, [doctorDataFetched, dispatch]);
 
+  // const showToast = () => {
+  //   toast.info('You can make an appointment on our website by registering and logging in now', {
+  //     position: 'top-right' , 
+  //     autoClose: 5000, 
+  //     closeButton: true, 
+  //     closeOnClick: true 
+     
+  //   });
+  // };
 
   return (
     <div>
-      <Collapse in={open}>
+    <Collapse in={open}>
         <Alert className="homeAlert" icon={false} action={
           <IconButton
             aria-label="close"
@@ -110,20 +121,27 @@ const Home = () => {
         }>
           You can make an appointment on our website by registering and logging in now
         </Alert>
+        
       </Collapse>
 
-      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5} 
-      sx={{
-        mr: 2,
-        display: 'flex',
-        flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
-        justifyContent: 'space-between',
-        alignItems: { xs: 'center', sm: 'left', md: 'left' },
-        ml: 3,
-        mt: 5
-      }}>
 
-        <img className='homeBoxImg' src={intimage} alt="Interior"  />
+      {/* <button className="homeAlert" onClick={notify}>Notify!</button>
+          <Button  className="homeAlert" onClick={showToast}>Show Toast</Button>
+          <ToastContainer  className="homeAlert" position="center"
+           />  */}
+
+      <Box className="homeBox" container="true" spacing={3} item="true" xs={12} sm={6} md={5}
+        sx={{
+          mr: 2,
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: "column", md: 'row', lg: 'row', xl: 'row', },
+          justifyContent: 'space-between',
+          alignItems: { xs: 'center', sm: 'left', md: 'left' },
+          ml: 3,
+          mt: 5
+        }}>
+
+        <img className='homeBoxImg' src={intimage} alt="Interior" />
 
         <Box
           className='boxText'
@@ -291,13 +309,13 @@ const Home = () => {
             </CardContent>
           </CardActionArea>
         </Card>
-        
+
       </Box>
 
-      <SocialIcons  whatsappNumber={whatsappNumber} />
+      <SocialIcons whatsappNumber={whatsappNumber} />
       <hr />
       <Copyright />
- 
+
     </div>
   );
 };

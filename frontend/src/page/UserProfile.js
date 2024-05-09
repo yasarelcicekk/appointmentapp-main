@@ -48,9 +48,9 @@ const Profile = () => {
       <div className="right-container clearfix">
         <h2>Information Profile</h2>
         <div className="input-group">
-          <label>
+          <label >
             <BadgeOutlinedIcon  sx={{  color: 'black',backgroundColor: 'white',marginBottom: '-5px' }}/>  Full Name:
-            <input className='profileInput' type="text" value={user.name} readOnly />
+            <input className='profileInput' type="text" value={user.name} readOnly/>
           </label>
         </div>
         <div className="input-group">
